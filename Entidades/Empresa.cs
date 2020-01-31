@@ -9,16 +9,18 @@ namespace ListagemDeFornecedores.Entidades
 {
     public class Empresa
     {
+        public int EmpresaId { get; set; }
 
         public string Nome { get; set; }
 
-        public UnidadesFederativas UF { get; set; }
+        public string UF { get; set; }
 
-        public int CNPJ { get; set; }
+        public long CNPJ { get; set; }
 
-        // propiedades para relacionamento do entity framework
+        //Navigation Properties
+
         public ICollection<Fornecedor> Fornecedores { get; set; }
 
-        public virtual FornecedorPF FornecedorPF { get; set; }
+        public  FornecedorPJ FornecedorPJ { get; set; }
     }
 }

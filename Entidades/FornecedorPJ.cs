@@ -8,8 +8,11 @@ namespace ListagemDeFornecedores.Entidades
 {
     public class FornecedorPJ : Fornecedor
     {
-        // propiedades para relacionamento do entity framework
-        public virtual Empresa Empresa { get; set; }
-        public int EmpresaId { get; set; }
+        //Navigation Properties
+        public int EmpresaFornecedorId { get; set; }
+
+        public Empresa EmpresaFornecedor { get; set; }
+
+
     }
 }

@@ -8,12 +8,12 @@ namespace ListagemDeFornecedores.Entidades
 {
     public abstract class Fornecedor
     {
-        public int Id { get; set; }
+        public int FornecedorId { get; set; }
 
 
-        // propiedades para relacionamento do entity framework
-        public int ClieteId { get; set; }
+        //Navigation Properties
+        public int EmpresaId { get; set; }
 
-        public Empresa Cliente { get; set; }
+        public Empresa Empresa { get; set; }
     }
 }

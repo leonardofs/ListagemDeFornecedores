@@ -1,8 +1,12 @@
-﻿using System;
+﻿using ListagemDeFornecedores.Contexto;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Text;
+
+using ListagemDeFornecedores.Entidades;
 
 namespace ListagemDeFornecedores
 {
@@ -14,6 +18,15 @@ namespace ListagemDeFornecedores
         [STAThread]
         static void Main()
         {
+          var empresa = new Empresa { CNPJ = 9999999999, UF = "MG", Nome = "Empresa 1" };
+
+             using (var db = new FornecedorContext())
+                {
+                    db.Empresas.Add(empresa);
+                    db.SaveChanges();
+
+                }
+
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(new Form1());

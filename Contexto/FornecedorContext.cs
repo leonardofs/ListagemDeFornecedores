@@ -11,11 +11,12 @@ namespace ListagemDeFornecedores.Contexto
 {
     public class FornecedorContext : DbContext
     {
-        public DbSet<Empresa> empresas;
-        public DbSet<Fornecedor> fornecedores;
+        public DbSet<Empresa> Empresas { get; set; }
 
-        public FornecedorContext(string connectionString = "FornecedorContext")
-          : base(connectionString)
+        public DbSet<Fornecedor> Fornecedores { get; set; }
+
+        public FornecedorContext()
+          : base("name=FornecedorContext")
         {
 
         }
@@ -25,18 +26,32 @@ namespace ListagemDeFornecedores.Contexto
         {
 
             modelBuilder.Entity<Empresa>()
-                .HasKey(e => e.CNPJ)
-                .HasOptional(e=>e.Fornecedores);
+                .HasKey(e => e.EmpresaId)
+                .HasOptional(e => e.Fornecedores);
+
+
+            // Herança com abordagem Table per Type
 
             modelBuilder.Entity<Fornecedor>()
-                .Map<FornecedorPF>(f => f.Requires("Tipo").HasValue("PF"))
-                .Map<FornecedorPJ>(f => f.Requires("Tipo").HasValue("PJ"))
-                
-               .HasRequired<Empresa>(f => f.Cliente)
-               .WithMany(e => e.Fornecedores)               
-               .HasForeignKey(f => f.ClieteId);
+                .ToTable("Fornecedores")
+                .HasRequired(f => f.Empresa)
+                .WithMany(e => e.Fornecedores)
+                .HasForeignKey(f => f.EmpresaId);
+
+            modelBuilder.Entity<FornecedorPJ>()
+                .ToTable("Fornecedor_PJ")
+                .HasRequired(f => f.EmpresaFornecedor)
+                .WithMany()
+                .HasForeignKey(e => e.EmpresaFornecedorId);
+
+            modelBuilder.Entity<FornecedorPF>()
+               .ToTable("Fornecedor_PF");
+
 
         }
+
+
+        
     }
 
 

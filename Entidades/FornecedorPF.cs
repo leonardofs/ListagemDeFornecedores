@@ -13,7 +13,7 @@ namespace ListagemDeFornecedores.Entidades
 
         public DateTimeOffset DataNascimento { get; set; }
 
-        public int Cpf { get; set; }
+        public long Cpf { get; set; }
 
     }
 }

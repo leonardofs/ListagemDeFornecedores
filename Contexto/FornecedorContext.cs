@@ -14,7 +14,7 @@ namespace ListagemDeFornecedores.Contexto
         public DbSet<Empresa> empresas;
         public DbSet<Fornecedor> fornecedores;
 
-        public FornecedorContext(string connectionString = "HotelDbConnectionString")
+        public FornecedorContext(string connectionString = "FornecedorContext")
           : base(connectionString)
         {
 

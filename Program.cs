@@ -1,11 +1,12 @@
-﻿using ListagemDeFornecedores.Contexto;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Text;
 
+using ListagemDeFornecedores.Contexto;
+using ListagemDeFornecedores.Views;
 using ListagemDeFornecedores.Entidades;
 
 namespace ListagemDeFornecedores
@@ -29,7 +30,7 @@ namespace ListagemDeFornecedores
 
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new Form1());
+            Application.Run(new MainForm());
         }
     }
 }

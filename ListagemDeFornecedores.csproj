@@ -61,11 +61,29 @@
     <Compile Include="Entidades\Fornecedor.cs" />
     <Compile Include="Entidades\FornecedorPF.cs" />
     <Compile Include="Entidades\FornecedorPJ.cs" />
-    <Compile Include="Form1.cs">
+    <Compile Include="Views\CadastroDeEmpresaForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Form1.Designer.cs">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <Compile Include="Views\CadastroDeEmpresaForm.Designer.cs">
+      <DependentUpon>CadastroDeEmpresaForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\CadastroDeFornecedoresForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\CadastroDeFornecedoresForm.Designer.cs">
+      <DependentUpon>CadastroDeFornecedoresForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\FornecedoresPorEmpresaForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\FornecedoresPorEmpresaForm.Designer.cs">
+      <DependentUpon>FornecedoresPorEmpresaForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\MainForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\MainForm.Designer.cs">
+      <DependentUpon>MainForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -80,6 +98,18 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
+    <EmbeddedResource Include="Views\CadastroDeEmpresaForm.resx">
+      <DependentUpon>CadastroDeEmpresaForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\CadastroDeFornecedoresForm.resx">
+      <DependentUpon>CadastroDeFornecedoresForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\FornecedoresPorEmpresaForm.resx">
+      <DependentUpon>FornecedoresPorEmpresaForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\MainForm.resx">
+      <DependentUpon>MainForm.cs</DependentUpon>
+    </EmbeddedResource>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>

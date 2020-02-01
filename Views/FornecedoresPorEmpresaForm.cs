@@ -8,11 +8,11 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace ListagemDeFornecedores
+namespace ListagemDeFornecedores.Views
 {
-    public partial class Form1 : Form
+    public partial class FornecedoresPorEmpresaForm : Form
     {
-        public Form1()
+        public FornecedoresPorEmpresaForm()
         {
             InitializeComponent();
         }

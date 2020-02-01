@@ -15,7 +15,7 @@ namespace ListagemDeFornecedores.Entidades
 
         public string UF { get; set; }
 
-        public long CNPJ { get; set; }
+        public string CNPJ { get; set; }
 
         //Navigation Properties
 

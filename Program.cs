@@ -19,14 +19,7 @@ namespace ListagemDeFornecedores
         [STAThread]
         static void Main()
         {
-          var empresa = new Empresa { CNPJ = 9999999999, UF = "MG", Nome = "Empresa 1" };
-
-             using (var db = new FornecedorContext())
-                {
-                    db.Empresas.Add(empresa);
-                    db.SaveChanges();
-
-                }
+          
 
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);

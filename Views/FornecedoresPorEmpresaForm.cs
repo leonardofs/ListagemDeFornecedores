@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Sirb.Documents.BR.Enumeration;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -15,6 +16,10 @@ namespace ListagemDeFornecedores.Views
         public FornecedoresPorEmpresaForm()
         {
             InitializeComponent();
+
+           
+            cboUF.DataSource = Enum.GetValues(typeof(State));
+            txtCnpj.Mask = Sirb.Documents.BR.Validation.CNPJ.PlaceMask("00.000.000/0000-00");           
         }
     }
 }

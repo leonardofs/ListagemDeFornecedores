@@ -11,14 +11,14 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-
+using System.Data.Entity;
 
 namespace ListagemDeFornecedores.Views
 {
     public partial class CadastroDeEmpresaForm : Form
     {
-        List<Empresa> empresasList = null;
-        Empresa empresa = null;
+        private List<Empresa> empresasList = null;
+        private Empresa empresa = null;
 
         public CadastroDeEmpresaForm()
         {
@@ -29,10 +29,6 @@ namespace ListagemDeFornecedores.Views
             cboEditUF.DataSource = Enum.GetValues(typeof(State));
             txtCnpj.Mask = Sirb.Documents.BR.Validation.CNPJ.PlaceMask("00.000.000/0000-00");
             txtEditCnpj.Mask = Sirb.Documents.BR.Validation.CNPJ.PlaceMask("00.000.000/0000-00");
-        }
-
-        private void CadastroDeEmpresaForm_Load(object sender, EventArgs e)
-        {
         }
 
         private void btnSalvar_Click(object sender, EventArgs e)
@@ -64,22 +60,13 @@ namespace ListagemDeFornecedores.Views
             txtCnpj.SelectionStart = 0;
         }
 
-
         private void btnCarregarEmpressas_Click(object sender, EventArgs e)
         {
-            listViewEmpresas.Items.Clear();
 
             btnCarregarEmpressas.Enabled = false;
             //todo carregar todas as empresas para o listview
-            using (var db = new FornecedorContext())
-            {
-                empresasList = db.Empresas.Select(x => x).ToList();
-            }
 
-            foreach (Empresa emp in empresasList)
-            {
-                listViewEmpresas.Items.Add(new ListViewItem(new string[] { emp.EmpresaId.ToString(), emp.Nome, emp.CNPJ, emp.UF }));
-            }
+            RefreshListView();
 
             btnCarregarEmpressas.Enabled = true;
         }
@@ -97,12 +84,15 @@ namespace ListagemDeFornecedores.Views
                 var uf = (State)Enum.Parse(typeof(State), empresa.UF);
 
                 pnlEdit.Enabled = true;
+
                 cboEditUF.SelectedItem = uf;
+                txtEditNome.Text = empresa.Nome;
+                txtEditCnpj.Text = empresa.CNPJ;
+
 
                 lblAviso.Visible = false;
             }
         }
-
 
         private void btnEditSalvar_Click(object sender, EventArgs e)
         {
@@ -119,6 +109,10 @@ namespace ListagemDeFornecedores.Views
                 };
                 Task task = EditarEmpresa(_empresaEditada);
 
+                txtEditNome.Clear();
+                txtEditCnpj.Clear();
+
+                RefreshListView();
             }
             else
             {
@@ -133,7 +127,7 @@ namespace ListagemDeFornecedores.Views
             if (txtEditCnpj.Text != "" && txtEditNome.Text != "" && empresa != null)
             {
                 var task = DeletarEmpresa(empresa);
-
+                task.Wait();
                 listViewEmpresas.SelectedItems.Clear();
 
                 txtEditNome.Clear();
@@ -144,12 +138,53 @@ namespace ListagemDeFornecedores.Views
                 pnlEdit.Enabled = false;
                 lblAviso.Visible = true;
 
+                RefreshListView();
             }
         }
 
+
+        //todo: refatorar
+        private void RefreshListView() {
+
+            listViewEmpresas.Items.Clear();
+
+            empresasList = CarregarEmpresas();
+
+            foreach (Empresa emp in empresasList)
+            {
+                listViewEmpresas.Items.Add(
+                    new ListViewItem(
+                        new string[] {
+                            emp.EmpresaId.ToString(),
+                            emp.Nome,
+                            emp.CNPJ,
+                            emp.UF
+                        }));
+            }
+
+
+
+        }
+
+
+
         //todo: refatorar para DAO
         #region Data Acess Functions 
-        public static async Task SalvarEmpresa(Empresa _empresa)
+
+        public List<Empresa> CarregarEmpresas()
+        {
+           
+            using (var db = new FornecedorContext())
+            {
+                return db.Empresas.Select(x => x).ToList();
+               // return  await db.Empresas.Select(x => x).ToListAsync();
+            }
+
+           
+
+        }
+
+        public async Task SalvarEmpresa(Empresa _empresa)
         {
             try
             {
@@ -169,7 +204,7 @@ namespace ListagemDeFornecedores.Views
             }
         }
 
-        public static async Task EditarEmpresa(Empresa _empresa)
+        public async Task EditarEmpresa(Empresa _empresa)
         {
             using (var db = new FornecedorContext())
             {
@@ -181,11 +216,13 @@ namespace ListagemDeFornecedores.Views
                     result.UF = _empresa.UF;
 
                     await db.SaveChangesAsync();
+
+                    MessageBox.Show("Alterações salvas com sucesso");
                 }
             }
         }
 
-        public static async Task DeletarEmpresa(Empresa _empresa)
+        public async Task DeletarEmpresa(Empresa _empresa)
         {
             using (var db = new FornecedorContext())
             {
@@ -195,9 +232,10 @@ namespace ListagemDeFornecedores.Views
                 await db.SaveChangesAsync();
             }
         }
+
         #endregion
 
-   
+
     }
 }
 

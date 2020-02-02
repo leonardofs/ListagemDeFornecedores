@@ -1,6 +1,7 @@
 ﻿using ListagemDeFornecedores.Contexto;
 using ListagemDeFornecedores.Entidades;
 using ListagemDeFornecedores.Utils.Enums;
+using Sirb.Documents.BR.Enumeration;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -10,23 +11,28 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using Sirb.Documents.BR.Validation;
 
 
 namespace ListagemDeFornecedores.Views
 {
     public partial class CadastroDeEmpresaForm : Form
     {
+        List<Empresa> empresasList = null;
+        Empresa empresa = null;
+
         public CadastroDeEmpresaForm()
         {
             InitializeComponent();
+
+            //Sirb.Documents.BR.Enumeration.State
+            cboUf.DataSource = Enum.GetValues(typeof(State));
+            cboEditUF.DataSource = Enum.GetValues(typeof(State));
+            txtCnpj.Mask = Sirb.Documents.BR.Validation.CNPJ.PlaceMask("00.000.000/0000-00");
+            txtEditCnpj.Mask = Sirb.Documents.BR.Validation.CNPJ.PlaceMask("00.000.000/0000-00");
         }
 
         private void CadastroDeEmpresaForm_Load(object sender, EventArgs e)
         {
-            cboUf.DataSource = Enum.GetValues(typeof(Sirb.Documents.BR.Enumeration.State));
-            // txtCnpj.Mask = "00,000,000/0000-00";
-            txtCnpj.Mask = CNPJ.PlaceMask("00.000.000/0000-00");
         }
 
         private void btnSalvar_Click(object sender, EventArgs e)
@@ -34,9 +40,8 @@ namespace ListagemDeFornecedores.Views
 
 
             //validação com o Sirb.Validation
-            if (CNPJ.IsValid(txtCnpj.Text))
+            if (Sirb.Documents.BR.Validation.CNPJ.IsValid(txtCnpj.Text))
             {
-
                 Empresa empresa = new Empresa()
                 {
                     Nome = txtNome.Text,
@@ -44,13 +49,14 @@ namespace ListagemDeFornecedores.Views
                     UF = cboUf.SelectedItem.ToString()
                 };
 
-                var Task = SalvarEmpresa(empresa);
+                var task = SalvarEmpresa(empresa);
                 txtCnpj.Clear();
                 txtNome.Clear();
-            }else{
+            }
+            else
+            {
                 MessageBox.Show("O CNPJ informado é invalido, por favor corrija.", "ERRO");
             }
-
         }
 
         private void txtCnpj_Enter(object sender, EventArgs e)
@@ -59,14 +65,98 @@ namespace ListagemDeFornecedores.Views
         }
 
 
-        public static async Task SalvarEmpresa(Empresa empresa)
+        private void btnCarregarEmpressas_Click(object sender, EventArgs e)
+        {
+            listViewEmpresas.Items.Clear();
+
+            btnCarregarEmpressas.Enabled = false;
+            //todo carregar todas as empresas para o listview
+            using (var db = new FornecedorContext())
+            {
+                empresasList = db.Empresas.Select(x => x).ToList();
+            }
+
+            foreach (Empresa emp in empresasList)
+            {
+                listViewEmpresas.Items.Add(new ListViewItem(new string[] { emp.EmpresaId.ToString(), emp.Nome, emp.CNPJ, emp.UF }));
+            }
+
+            btnCarregarEmpressas.Enabled = true;
+        }
+
+        private void listViewEmpresas_SelectedIndexChanged(object sender, EventArgs e)
         {
 
+            if (listViewEmpresas.SelectedItems.Count >= 1)
+            {
+
+                string itemSelecionadoId = listViewEmpresas.SelectedItems[0].SubItems[0].Text;
+                empresa = empresasList.Find(emp => emp.EmpresaId == int.Parse(itemSelecionadoId));
+
+                //Sirb.Documents.BR.Enumeration.State
+                var uf = (State)Enum.Parse(typeof(State), empresa.UF);
+
+                pnlEdit.Enabled = true;
+                cboEditUF.SelectedItem = uf;
+
+                lblAviso.Visible = false;
+            }
+        }
+
+
+        private void btnEditSalvar_Click(object sender, EventArgs e)
+        {
+            btnEditSalvar.Enabled = false;
+            //validação do CNPJ no edit
+            if (Sirb.Documents.BR.Validation.CNPJ.IsValid(txtEditCnpj.Text))
+            {
+                var _empresaEditada = new Empresa
+                {
+                    EmpresaId = empresa.EmpresaId,
+                    Nome = txtEditNome.Text,
+                    CNPJ = txtEditCnpj.Text,
+                    UF = cboEditUF.Text
+                };
+                Task task = EditarEmpresa(_empresaEditada);
+
+            }
+            else
+            {
+                MessageBox.Show("CNPJ invalido");
+            }
+            btnEditSalvar.Enabled = true;
+
+        }
+
+        private void btnApagarEmpresa_Click(object sender, EventArgs e)
+        {
+            if (txtEditCnpj.Text != "" && txtEditNome.Text != "" && empresa != null)
+            {
+                var task = DeletarEmpresa(empresa);
+
+                listViewEmpresas.SelectedItems.Clear();
+
+                txtEditNome.Clear();
+                txtEditCnpj.Clear();
+                cboEditUF.SelectedIndex = 0;
+                empresa = null;
+
+                pnlEdit.Enabled = false;
+                lblAviso.Visible = true;
+
+            }
+        }
+
+        //todo: refatorar para DAO
+        #region Data Acess Functions 
+        public static async Task SalvarEmpresa(Empresa _empresa)
+        {
             try
             {
                 using (var db = new FornecedorContext())
                 {
-                    db.Empresas.Add(empresa);
+
+                    db.Empresas.Add(_empresa);
                     await db.SaveChangesAsync();
                 }
 
@@ -75,12 +165,39 @@ namespace ListagemDeFornecedores.Views
             }
             catch (Exception)
             {
-
                 throw;
-
             }
-
-
         }
+
+        public static async Task EditarEmpresa(Empresa _empresa)
+        {
+            using (var db = new FornecedorContext())
+            {
+                var result = db.Empresas.Where(emp => emp.EmpresaId == _empresa.EmpresaId).FirstOrDefault();
+                if (result != null)
+                {
+                    result.Nome = _empresa.Nome;
+                    result.CNPJ = _empresa.CNPJ;
+                    result.UF = _empresa.UF;
+
+                    await db.SaveChangesAsync();
+                }
+            }
+        }
+
+        public static async Task DeletarEmpresa(Empresa _empresa)
+        {
+            using (var db = new FornecedorContext())
+            {
+                var result = db.Empresas.Where(emp => emp.EmpresaId == _empresa.EmpresaId).FirstOrDefault();
+                db.Empresas.Remove(result);
+
+                await db.SaveChangesAsync();
+            }
+        }
+        #endregion
+
+   
     }
 }
+

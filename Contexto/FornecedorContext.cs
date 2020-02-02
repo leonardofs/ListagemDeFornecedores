@@ -38,6 +38,9 @@ namespace ListagemDeFornecedores.Contexto
                 .WithMany(e => e.Fornecedores)
                 .HasForeignKey(f => f.EmpresaId);
 
+            modelBuilder.Entity<Fornecedor>()
+                .Ignore(f => f.TipoDePessoa);
+
             modelBuilder.Entity<FornecedorPJ>()
                 .ToTable("Fornecedor_PJ")
                 .HasRequired(f => f.EmpresaFornecedor)

@@ -8,6 +8,11 @@ namespace ListagemDeFornecedores.Entidades
 {
     public class FornecedorPJ : Fornecedor
     {
+
+        public FornecedorPJ()
+        {
+            TipoDePessoa = "PJ";
+        }
         //Navigation Properties
         public int EmpresaFornecedorId { get; set; }
 

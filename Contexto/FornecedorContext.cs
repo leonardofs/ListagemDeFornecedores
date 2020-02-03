@@ -2,6 +2,7 @@
 using ListagemDeFornecedores.Entidades;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Data.Entity;
 using System.Linq;
 using System.Text;
@@ -18,7 +19,7 @@ namespace ListagemDeFornecedores.Contexto
         public FornecedorContext()
           : base("name=FornecedorContext")
         {
-
+            this.Configuration.ProxyCreationEnabled = false;
         }
 
 
@@ -26,27 +27,24 @@ namespace ListagemDeFornecedores.Contexto
         {
 
             modelBuilder.Entity<Empresa>()
-                .HasKey(e => e.EmpresaId)
-                .HasOptional(e => e.Fornecedores);
+               .HasKey(e => e.EmpresaId);
 
-
-            // Herança com abordagem Table per Type
 
             modelBuilder.Entity<Fornecedor>()
-                .ToTable("Fornecedores")
+                .ToTable("Fornecedores")               
                 .HasRequired(f => f.Empresa)
                 .WithMany(e => e.Fornecedores)
                 .HasForeignKey(f => f.EmpresaId);
 
             modelBuilder.Entity<Fornecedor>()
-                .Ignore(f => f.TipoDePessoa);
+            .HasKey(f => f.FornecedorId);
 
             modelBuilder.Entity<FornecedorPJ>()
                 .ToTable("Fornecedor_PJ")
-                .HasRequired(f => f.EmpresaFornecedor)
+                .HasRequired(pj => pj.EmpresaFornecedor)
                 .WithMany()
                 .HasForeignKey(e => e.EmpresaFornecedorId);
-
+               
             modelBuilder.Entity<FornecedorPF>()
                .ToTable("Fornecedor_PF");
 

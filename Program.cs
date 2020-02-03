@@ -8,6 +8,7 @@ using System.Text;
 using ListagemDeFornecedores.Contexto;
 using ListagemDeFornecedores.Views;
 using ListagemDeFornecedores.Entidades;
+using ListagemDeFornecedores.Repositorios;
 
 namespace ListagemDeFornecedores
 {
@@ -19,8 +20,11 @@ namespace ListagemDeFornecedores
         [STAThread]
         static void Main()
         {
-          
 
+            DadosTeste dados = new DadosTeste();
+            dados.PopulaBancoEmpresas();
+
+            dados.PopulaBancoFornecedorEmpresa();
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(new MainForm());

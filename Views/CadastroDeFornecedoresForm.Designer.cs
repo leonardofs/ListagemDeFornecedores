@@ -29,17 +29,21 @@
         private void InitializeComponent()
         {
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.txtIdadeUF = new System.Windows.Forms.MaskedTextBox();
+            this.btnSelecionarPJ = new System.Windows.Forms.Button();
+            this.txtPJ = new System.Windows.Forms.TextBox();
+            this.lblPJ = new System.Windows.Forms.Label();
             this.btnSelecionar = new System.Windows.Forms.Button();
             this.txtEmpresa = new System.Windows.Forms.TextBox();
             this.txtCpf = new System.Windows.Forms.MaskedTextBox();
-            this.textBox3 = new System.Windows.Forms.TextBox();
-            this.button2 = new System.Windows.Forms.Button();
-            this.button1 = new System.Windows.Forms.Button();
+            this.btnCancelarFornecedor = new System.Windows.Forms.Button();
+            this.btnSalvarFornecedor = new System.Windows.Forms.Button();
             this.txtNome = new System.Windows.Forms.TextBox();
-            this.lblUF = new System.Windows.Forms.Label();
+            this.lblIdadeUF = new System.Windows.Forms.Label();
             this.lblCpfCnpj = new System.Windows.Forms.Label();
             this.lblNome = new System.Windows.Forms.Label();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.rBtnPF = new System.Windows.Forms.RadioButton();
             this.rBtnPJ = new System.Windows.Forms.RadioButton();
             this.lblEmpresa = new System.Windows.Forms.Label();
             this.btnCancelar = new System.Windows.Forms.Button();
@@ -49,11 +53,7 @@
             this.clnNome = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.clnCNPJ = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.clnUF = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.rBtnPF = new System.Windows.Forms.RadioButton();
             this.gBoxEmpresa = new System.Windows.Forms.GroupBox();
-            this.btnSelecionarPJ = new System.Windows.Forms.Button();
-            this.txtPJ = new System.Windows.Forms.TextBox();
-            this.lblPJ = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.gBoxEmpresa.SuspendLayout();
@@ -61,17 +61,17 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.txtIdadeUF);
             this.groupBox1.Controls.Add(this.btnSelecionarPJ);
             this.groupBox1.Controls.Add(this.txtPJ);
             this.groupBox1.Controls.Add(this.lblPJ);
             this.groupBox1.Controls.Add(this.btnSelecionar);
             this.groupBox1.Controls.Add(this.txtEmpresa);
             this.groupBox1.Controls.Add(this.txtCpf);
-            this.groupBox1.Controls.Add(this.textBox3);
-            this.groupBox1.Controls.Add(this.button2);
-            this.groupBox1.Controls.Add(this.button1);
+            this.groupBox1.Controls.Add(this.btnCancelarFornecedor);
+            this.groupBox1.Controls.Add(this.btnSalvarFornecedor);
             this.groupBox1.Controls.Add(this.txtNome);
-            this.groupBox1.Controls.Add(this.lblUF);
+            this.groupBox1.Controls.Add(this.lblIdadeUF);
             this.groupBox1.Controls.Add(this.lblCpfCnpj);
             this.groupBox1.Controls.Add(this.lblNome);
             this.groupBox1.Controls.Add(this.groupBox2);
@@ -82,6 +82,46 @@
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Cadastro de Fornecedor";
+            // 
+            // txtIdadeUF
+            // 
+            this.txtIdadeUF.Location = new System.Drawing.Point(99, 291);
+            this.txtIdadeUF.Mask = "00";
+            this.txtIdadeUF.Name = "txtIdadeUF";
+            this.txtIdadeUF.Size = new System.Drawing.Size(39, 20);
+            this.txtIdadeUF.TabIndex = 17;
+            // 
+            // btnSelecionarPJ
+            // 
+            this.btnSelecionarPJ.Location = new System.Drawing.Point(262, 172);
+            this.btnSelecionarPJ.Name = "btnSelecionarPJ";
+            this.btnSelecionarPJ.Size = new System.Drawing.Size(75, 20);
+            this.btnSelecionarPJ.TabIndex = 16;
+            this.btnSelecionarPJ.Text = "Selecionar...";
+            this.btnSelecionarPJ.UseVisualStyleBackColor = true;
+            this.btnSelecionarPJ.Visible = false;
+            this.btnSelecionarPJ.Click += new System.EventHandler(this.btnSelecionarPJ_Click);
+            // 
+            // txtPJ
+            // 
+            this.txtPJ.Enabled = false;
+            this.txtPJ.Location = new System.Drawing.Point(88, 172);
+            this.txtPJ.Name = "txtPJ";
+            this.txtPJ.ReadOnly = true;
+            this.txtPJ.Size = new System.Drawing.Size(168, 20);
+            this.txtPJ.TabIndex = 15;
+            this.txtPJ.Text = "Selecione a empresa fornecedora";
+            this.txtPJ.Visible = false;
+            // 
+            // lblPJ
+            // 
+            this.lblPJ.AutoSize = true;
+            this.lblPJ.Location = new System.Drawing.Point(6, 175);
+            this.lblPJ.Name = "lblPJ";
+            this.lblPJ.Size = new System.Drawing.Size(76, 13);
+            this.lblPJ.TabIndex = 14;
+            this.lblPJ.Text = "Fornecedor PJ";
+            this.lblPJ.Visible = false;
             // 
             // btnSelecionar
             // 
@@ -110,32 +150,25 @@
             this.txtCpf.Size = new System.Drawing.Size(238, 20);
             this.txtCpf.TabIndex = 11;
             // 
-            // textBox3
+            // btnCancelarFornecedor
             // 
-            this.textBox3.Location = new System.Drawing.Point(99, 296);
-            this.textBox3.Name = "textBox3";
-            this.textBox3.Size = new System.Drawing.Size(238, 20);
-            this.textBox3.TabIndex = 10;
+            this.btnCancelarFornecedor.Location = new System.Drawing.Point(170, 372);
+            this.btnCancelarFornecedor.Name = "btnCancelarFornecedor";
+            this.btnCancelarFornecedor.Size = new System.Drawing.Size(75, 23);
+            this.btnCancelarFornecedor.TabIndex = 8;
+            this.btnCancelarFornecedor.Text = "Cancelar";
+            this.btnCancelarFornecedor.UseVisualStyleBackColor = true;
+            this.btnCancelarFornecedor.Click += new System.EventHandler(this.button2_Click);
             // 
-            // button2
+            // btnSalvarFornecedor
             // 
-            this.button2.Location = new System.Drawing.Point(170, 372);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(75, 23);
-            this.button2.TabIndex = 8;
-            this.button2.Text = "Cancelar";
-            this.button2.UseVisualStyleBackColor = true;
-            this.button2.Click += new System.EventHandler(this.button2_Click);
-            // 
-            // button1
-            // 
-            this.button1.Location = new System.Drawing.Point(262, 372);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
-            this.button1.TabIndex = 7;
-            this.button1.Text = "Salvar";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            this.btnSalvarFornecedor.Location = new System.Drawing.Point(262, 372);
+            this.btnSalvarFornecedor.Name = "btnSalvarFornecedor";
+            this.btnSalvarFornecedor.Size = new System.Drawing.Size(75, 23);
+            this.btnSalvarFornecedor.TabIndex = 7;
+            this.btnSalvarFornecedor.Text = "Salvar";
+            this.btnSalvarFornecedor.UseVisualStyleBackColor = true;
+            this.btnSalvarFornecedor.Click += new System.EventHandler(this.btnSalvarFornecedor_Click);
             // 
             // txtNome
             // 
@@ -144,14 +177,14 @@
             this.txtNome.Size = new System.Drawing.Size(238, 20);
             this.txtNome.TabIndex = 6;
             // 
-            // lblUF
+            // lblIdadeUF
             // 
-            this.lblUF.AutoSize = true;
-            this.lblUF.Location = new System.Drawing.Point(6, 299);
-            this.lblUF.Name = "lblUF";
-            this.lblUF.Size = new System.Drawing.Size(35, 13);
-            this.lblUF.TabIndex = 5;
-            this.lblUF.Text = "label3";
+            this.lblIdadeUF.AutoSize = true;
+            this.lblIdadeUF.Location = new System.Drawing.Point(6, 299);
+            this.lblIdadeUF.Name = "lblIdadeUF";
+            this.lblIdadeUF.Size = new System.Drawing.Size(34, 13);
+            this.lblIdadeUF.TabIndex = 5;
+            this.lblIdadeUF.Text = "Idade";
             // 
             // lblCpfCnpj
             // 
@@ -181,6 +214,19 @@
             this.groupBox2.TabIndex = 2;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Tipo de Pessoa";
+            // 
+            // rBtnPF
+            // 
+            this.rBtnPF.AutoSize = true;
+            this.rBtnPF.Checked = true;
+            this.rBtnPF.Location = new System.Drawing.Point(198, 40);
+            this.rBtnPF.Name = "rBtnPF";
+            this.rBtnPF.Size = new System.Drawing.Size(90, 17);
+            this.rBtnPF.TabIndex = 1;
+            this.rBtnPF.TabStop = true;
+            this.rBtnPF.Text = "Pessoa Fisica";
+            this.rBtnPF.UseVisualStyleBackColor = true;
+            this.rBtnPF.CheckedChanged += new System.EventHandler(this.rBtnPF_CheckedChanged);
             // 
             // rBtnPJ
             // 
@@ -258,19 +304,6 @@
             this.clnUF.Text = "UF";
             this.clnUF.Width = 30;
             // 
-            // rBtnPF
-            // 
-            this.rBtnPF.AutoSize = true;
-            this.rBtnPF.Checked = true;
-            this.rBtnPF.Location = new System.Drawing.Point(198, 40);
-            this.rBtnPF.Name = "rBtnPF";
-            this.rBtnPF.Size = new System.Drawing.Size(90, 17);
-            this.rBtnPF.TabIndex = 1;
-            this.rBtnPF.TabStop = true;
-            this.rBtnPF.Text = "Pessoa Fisica";
-            this.rBtnPF.UseVisualStyleBackColor = true;
-            this.rBtnPF.CheckedChanged += new System.EventHandler(this.rBtnPF_CheckedChanged);
-            // 
             // gBoxEmpresa
             // 
             this.gBoxEmpresa.Controls.Add(this.listViewEmpresas);
@@ -283,38 +316,6 @@
             this.gBoxEmpresa.TabStop = false;
             this.gBoxEmpresa.Text = "Selecionar empresa";
             this.gBoxEmpresa.Visible = false;
-            // 
-            // btnSelecionarPJ
-            // 
-            this.btnSelecionarPJ.Location = new System.Drawing.Point(262, 172);
-            this.btnSelecionarPJ.Name = "btnSelecionarPJ";
-            this.btnSelecionarPJ.Size = new System.Drawing.Size(75, 20);
-            this.btnSelecionarPJ.TabIndex = 16;
-            this.btnSelecionarPJ.Text = "Selecionar...";
-            this.btnSelecionarPJ.UseVisualStyleBackColor = true;
-            this.btnSelecionarPJ.Visible = false;
-            this.btnSelecionarPJ.Click += new System.EventHandler(this.btnSelecionarPJ_Click);
-            // 
-            // txtPJ
-            // 
-            this.txtPJ.Enabled = false;
-            this.txtPJ.Location = new System.Drawing.Point(88, 172);
-            this.txtPJ.Name = "txtPJ";
-            this.txtPJ.ReadOnly = true;
-            this.txtPJ.Size = new System.Drawing.Size(168, 20);
-            this.txtPJ.TabIndex = 15;
-            this.txtPJ.Text = "Selecione a empresa fornecedora";
-            this.txtPJ.Visible = false;
-            // 
-            // lblPJ
-            // 
-            this.lblPJ.AutoSize = true;
-            this.lblPJ.Location = new System.Drawing.Point(6, 175);
-            this.lblPJ.Name = "lblPJ";
-            this.lblPJ.Size = new System.Drawing.Size(76, 13);
-            this.lblPJ.TabIndex = 14;
-            this.lblPJ.Text = "Fornecedor PJ";
-            this.lblPJ.Visible = false;
             // 
             // CadastroDeFornecedoresForm
             // 
@@ -342,13 +343,12 @@
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.RadioButton rBtnPJ;
         private System.Windows.Forms.TextBox txtNome;
-        private System.Windows.Forms.Label lblUF;
+        private System.Windows.Forms.Label lblIdadeUF;
         private System.Windows.Forms.Label lblCpfCnpj;
         private System.Windows.Forms.Label lblNome;
-        private System.Windows.Forms.Button button2;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button btnCancelarFornecedor;
+        private System.Windows.Forms.Button btnSalvarFornecedor;
         private System.Windows.Forms.MaskedTextBox txtCpf;
-        private System.Windows.Forms.TextBox textBox3;
         private System.Windows.Forms.TextBox txtEmpresa;
         private System.Windows.Forms.Button btnSelecionar;
         private System.Windows.Forms.Button btnCancelar;
@@ -363,5 +363,6 @@
         private System.Windows.Forms.Button btnSelecionarPJ;
         private System.Windows.Forms.TextBox txtPJ;
         private System.Windows.Forms.Label lblPJ;
+        private System.Windows.Forms.MaskedTextBox txtIdadeUF;
     }
 }

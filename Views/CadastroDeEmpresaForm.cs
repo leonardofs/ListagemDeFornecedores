@@ -11,6 +11,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using ListagemDeFornecedores.Repositorios;
 using System.Data.Entity;
 
 namespace ListagemDeFornecedores.Views
@@ -46,7 +47,7 @@ namespace ListagemDeFornecedores.Views
                     UF = cboUf.SelectedItem.ToString()
                 };
 
-                var task = SalvarEmpresa(empresa);
+                Task task = EmpresaDAO.SalvarEmpresa(empresa);
                 txtCnpj.Clear();
                 txtNome.Clear();
             }
@@ -108,12 +109,12 @@ namespace ListagemDeFornecedores.Views
                     CNPJ = txtEditCnpj.Text,
                     UF = cboEditUF.Text
                 };
-                Task task = EditarEmpresa(_empresaEditada);
+                Task task = EmpresaDAO.EditarEmpresa(_empresaEditada);
 
                 txtEditNome.Clear();
                 txtEditCnpj.Clear();
 
-                RefreshListView();
+                RefreshListView(); 
             }
             else
             {
@@ -127,8 +128,8 @@ namespace ListagemDeFornecedores.Views
         {
             if (txtEditCnpj.Text != "" && txtEditNome.Text != "" && empresa != null)
             {
-                var task = DeletarEmpresa(empresa);
-                task.Wait();
+                var task = EmpresaDAO.DeletarEmpresa(empresa);
+               // task.Wait();
                 listViewEmpresas.SelectedItems.Clear();
 
                 txtEditNome.Clear();
@@ -143,14 +144,12 @@ namespace ListagemDeFornecedores.Views
             }
         }
 
-
         //todo: refatorar
         private void RefreshListView() {
 
             listViewEmpresas.Items.Clear();
-
-            empresasList = CarregarEmpresas();
-
+            empresasList = EmpresaDAO.GetEmpresas();
+           
             foreach (Empresa emp in empresasList)
             {
                 listViewEmpresas.Items.Add(
@@ -163,86 +162,8 @@ namespace ListagemDeFornecedores.Views
                         }));
             }
 
-
-
         }
 
-
-
-        //todo: refatorar para DAO
-        #region Data Acess Functions 
-
-        public List<Empresa> CarregarEmpresas()
-        {
-           
-            using (var db = new FornecedorContext())
-            {
-                return db.Empresas.Select(x => x).ToList();
-               // return  await db.Empresas.Select(x => x).ToListAsync();
-            }
-
-           
-
-        }
-
-        public async Task SalvarEmpresa(Empresa _empresa)
-        {
-            try
-            {
-                using (var db = new FornecedorContext())
-                {
-
-                    db.Empresas.Add(_empresa);
-                    await db.SaveChangesAsync();
-                }
-
-                MessageBox.Show("A empresa foi cadastrada com sucesso.", "Sucesso");
-
-            }
-            catch (Exception)
-            {
-                throw;
-            }
-        }
-
-        public async Task EditarEmpresa(Empresa _empresa)
-        {
-            using (var db = new FornecedorContext())
-            {
-                var result = db.Empresas.Where(emp => emp.EmpresaId == _empresa.EmpresaId).FirstOrDefault();
-                if (result != null)
-                {
-                    result.Nome = _empresa.Nome;
-                    result.CNPJ = _empresa.CNPJ;
-                    result.UF = _empresa.UF;
-
-                    await db.SaveChangesAsync();
-
-                    MessageBox.Show("Alterações salvas com sucesso");
-                }
-            }
-        }
-
-        public async Task DeletarEmpresa(Empresa _empresa)
-        {
-            using (var db = new FornecedorContext())
-            {
-                var result = db.Empresas.Where(emp => emp.EmpresaId == _empresa.EmpresaId).FirstOrDefault();
-                db.Empresas.Remove(result);
-
-                await db.SaveChangesAsync();
-            }
-        }
-
-
-
-
-        #endregion
-
-        private void lblVisualizar_Click(object sender, EventArgs e)
-        {
-
-        }
     }
 }
 

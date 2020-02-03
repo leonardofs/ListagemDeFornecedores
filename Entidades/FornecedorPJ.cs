@@ -11,12 +11,13 @@ namespace ListagemDeFornecedores.Entidades
 
         public FornecedorPJ()
         {
-            TipoDePessoa = "PJ";
+            Tipo = "PJ";
         }
-        //Navigation Properties
-        public int EmpresaFornecedorId { get; set; }
 
-        public Empresa EmpresaFornecedor { get; set; }
+        //Navigation Properties
+
+        public int EmpresaFornecedorId { get; set; }
+        public virtual Empresa EmpresaFornecedor { get; set; }
 
 
     }

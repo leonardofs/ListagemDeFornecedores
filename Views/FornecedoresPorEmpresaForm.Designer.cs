@@ -49,7 +49,6 @@
             this.bindingNavigatorMoveLastItem = new System.Windows.Forms.ToolStripButton();
             this.bindingNavigatorSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.toolBtnCarregar = new System.Windows.Forms.ToolStripButton();
-            this.empresaBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.toolsFornecedor = new System.Windows.Forms.ToolStrip();
             this.btnAdicionar = new System.Windows.Forms.ToolStripButton();
@@ -59,12 +58,14 @@
             this.btnExcluir = new System.Windows.Forms.ToolStripButton();
             this.listViewFornecedores = new System.Windows.Forms.ListView();
             this.ID = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.Nome = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.placeTipo = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.placeNome = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.placeCpfCnpj = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.placeUF = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.bindingNavigator)).BeginInit();
             this.bindingNavigator.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.bindingSource)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.empresaBindingSource)).BeginInit();
             this.groupBox2.SuspendLayout();
             this.toolsFornecedor.SuspendLayout();
             this.SuspendLayout();
@@ -79,7 +80,6 @@
             this.groupBox1.Controls.Add(this.lblCnpj);
             this.groupBox1.Controls.Add(this.lblNome);
             this.groupBox1.Controls.Add(this.bindingNavigator);
-            this.groupBox1.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.empresaBindingSource, "CNPJ", true));
             this.groupBox1.Location = new System.Drawing.Point(13, 12);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(368, 395);
@@ -166,6 +166,10 @@
             this.bindingNavigator.TabIndex = 0;
             this.bindingNavigator.Text = "bindingNavigator1";
             // 
+            // bindingSource
+            // 
+            this.bindingSource.CurrentChanged += new System.EventHandler(this.bindingSource_CurrentChanged);
+            // 
             // bindingNavigatorCountItem
             // 
             this.bindingNavigatorCountItem.Name = "bindingNavigatorCountItem";
@@ -200,7 +204,6 @@
             // 
             this.bindingNavigatorPositionItem.AccessibleName = "Posição";
             this.bindingNavigatorPositionItem.AutoSize = false;
-            this.bindingNavigatorPositionItem.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.bindingNavigatorPositionItem.Name = "bindingNavigatorPositionItem";
             this.bindingNavigatorPositionItem.Size = new System.Drawing.Size(50, 23);
             this.bindingNavigatorPositionItem.Text = "0";
@@ -245,10 +248,6 @@
             this.toolBtnCarregar.Text = "Carregar";
             this.toolBtnCarregar.ToolTipText = "Carregar";
             this.toolBtnCarregar.Click += new System.EventHandler(this.toolBtnCarregar_Click);
-            // 
-            // empresaBindingSource
-            // 
-            this.empresaBindingSource.DataSource = typeof(ListagemDeFornecedores.Entidades.Empresa);
             // 
             // groupBox2
             // 
@@ -298,6 +297,7 @@
             this.btnEditar.Name = "btnEditar";
             this.btnEditar.Size = new System.Drawing.Size(41, 22);
             this.btnEditar.Text = "Editar";
+            this.btnEditar.Click += new System.EventHandler(this.btnEditar_Click);
             // 
             // toolStripSeparator2
             // 
@@ -310,28 +310,56 @@
             this.btnExcluir.Image = ((System.Drawing.Image)(resources.GetObject("btnExcluir.Image")));
             this.btnExcluir.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.btnExcluir.Name = "btnExcluir";
-            this.btnExcluir.Size = new System.Drawing.Size(46, 22);
+            this.btnExcluir.Size = new System.Drawing.Size(45, 22);
             this.btnExcluir.Text = "Excluir";
+            this.btnExcluir.Click += new System.EventHandler(this.btnExcluir_Click);
             // 
             // listViewFornecedores
             // 
             this.listViewFornecedores.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.ID,
-            this.Nome});
+            this.placeTipo,
+            this.placeNome,
+            this.placeCpfCnpj,
+            this.placeUF});
             this.listViewFornecedores.HideSelection = false;
             this.listViewFornecedores.Location = new System.Drawing.Point(6, 44);
+            this.listViewFornecedores.MultiSelect = false;
             this.listViewFornecedores.Name = "listViewFornecedores";
             this.listViewFornecedores.Size = new System.Drawing.Size(392, 348);
             this.listViewFornecedores.TabIndex = 0;
             this.listViewFornecedores.UseCompatibleStateImageBehavior = false;
+            this.listViewFornecedores.View = System.Windows.Forms.View.Details;
+            this.listViewFornecedores.SelectedIndexChanged += new System.EventHandler(this.listViewFornecedores_SelectedIndexChanged);
             // 
             // ID
             // 
             this.ID.Text = "ID";
+            this.ID.Width = 30;
             // 
-            // Nome
+            // placeTipo
             // 
-            this.Nome.Text = "Nome/ R. Social";
+            this.placeTipo.DisplayIndex = 4;
+            this.placeTipo.Text = "Tipo";
+            this.placeTipo.Width = 30;
+            // 
+            // placeNome
+            // 
+            this.placeNome.DisplayIndex = 1;
+            this.placeNome.Text = "Nome/ R. Social";
+            this.placeNome.Width = 160;
+            // 
+            // placeCpfCnpj
+            // 
+            this.placeCpfCnpj.DisplayIndex = 2;
+            this.placeCpfCnpj.Text = "CPF / CNPJ";
+            this.placeCpfCnpj.Width = 120;
+            // 
+            // placeUF
+            // 
+            this.placeUF.DisplayIndex = 3;
+            this.placeUF.Text = "UF";
+            this.placeUF.Width = 30;
             // 
             // FornecedoresPorEmpresaForm
             // 
@@ -349,7 +377,6 @@
             this.bindingNavigator.ResumeLayout(false);
             this.bindingNavigator.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.bindingSource)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.empresaBindingSource)).EndInit();
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
             this.toolsFornecedor.ResumeLayout(false);
@@ -379,7 +406,6 @@
         private System.Windows.Forms.Label lblCnpj;
         private System.Windows.Forms.Label lblNome;
         private System.Windows.Forms.BindingSource bindingSource;
-        private System.Windows.Forms.BindingSource empresaBindingSource;
         private System.Windows.Forms.TextBox txtUf;
         private System.Windows.Forms.ToolStripButton toolBtnCarregar;
         private System.Windows.Forms.ToolStrip toolsFornecedor;
@@ -389,6 +415,9 @@
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
         private System.Windows.Forms.ColumnHeader ID;
-        private System.Windows.Forms.ColumnHeader Nome;
+        private System.Windows.Forms.ColumnHeader placeNome;
+        private System.Windows.Forms.ColumnHeader placeCpfCnpj;
+        private System.Windows.Forms.ColumnHeader placeUF;
+        private System.Windows.Forms.ColumnHeader placeTipo;
     }
 }

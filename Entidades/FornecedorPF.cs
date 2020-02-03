@@ -11,12 +11,10 @@ namespace ListagemDeFornecedores.Entidades
 
         public FornecedorPF()
         {
-            TipoDePessoa = "PF";
+            Tipo = "PF";
         }
 
-        public string Nome { get; set; }
-
-        public DateTimeOffset DataNascimento { get; set; }
+        public string NomeFornecedor { get; set; }
 
         public string Cpf { get; set; }
 

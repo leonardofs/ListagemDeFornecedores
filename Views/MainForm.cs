@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ListagemDeFornecedores.Repositorios;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -15,6 +16,7 @@ namespace ListagemDeFornecedores.Views
         public MainForm()
         {
             InitializeComponent();
+
         }
 
         private void empresaToolStripMenuItem_Click(object sender, EventArgs e)
@@ -54,6 +56,15 @@ namespace ListagemDeFornecedores.Views
             form.Show();
         }
 
+        private void ContainerPanel_Paint(object sender, PaintEventArgs e)
+        {
 
-    }
+        }
+
+        private void MainForm_Load(object sender, EventArgs e)
+        {
+        
+
+        }
+}
 }

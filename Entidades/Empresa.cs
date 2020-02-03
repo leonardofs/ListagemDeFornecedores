@@ -21,6 +21,7 @@ namespace ListagemDeFornecedores.Entidades
 
         public ICollection<Fornecedor> Fornecedores { get; set; }
 
-        public  FornecedorPJ FornecedorPJ { get; set; }
+        public virtual FornecedorPJ fornecedorPJ { get; set; }
+
     }
 }

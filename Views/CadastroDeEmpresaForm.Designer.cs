@@ -289,7 +289,7 @@
             this.lblVisualizar.TabIndex = 23;
             this.lblVisualizar.Text = "Visualizar todas as empresas";
             this.lblVisualizar.UseWaitCursor = true;
-            this.lblVisualizar.Click += new System.EventHandler(this.lblVisualizar_Click);
+
             // 
             // btnCarregarEmpressas
             // 
@@ -359,7 +359,6 @@
 
         #endregion
 
-        private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label lblNome;
         private System.Windows.Forms.Label lblCnpj;
         private System.Windows.Forms.Label lblUf;

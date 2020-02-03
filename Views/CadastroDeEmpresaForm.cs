@@ -27,8 +27,9 @@ namespace ListagemDeFornecedores.Views
             //Sirb.Documents.BR.Enumeration.State
             cboUf.DataSource = Enum.GetValues(typeof(State));
             cboEditUF.DataSource = Enum.GetValues(typeof(State));
-            txtCnpj.Mask = Sirb.Documents.BR.Validation.CNPJ.PlaceMask("00.000.000/0000-00");
-            txtEditCnpj.Mask = Sirb.Documents.BR.Validation.CNPJ.PlaceMask("00.000.000/0000-00");
+            var mask = Sirb.Documents.BR.Validation.CNPJ.PlaceMask("00000000000000");
+            txtCnpj.Mask = mask;
+            txtEditCnpj.Mask = mask;
         }
 
         private void btnSalvar_Click(object sender, EventArgs e)
@@ -233,9 +234,15 @@ namespace ListagemDeFornecedores.Views
             }
         }
 
+
+
+
         #endregion
 
+        private void lblVisualizar_Click(object sender, EventArgs e)
+        {
 
+        }
     }
 }
 

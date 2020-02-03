@@ -66,16 +66,16 @@
             // lblNome
             // 
             this.lblNome.AutoSize = true;
-            this.lblNome.Location = new System.Drawing.Point(46, 87);
+            this.lblNome.Location = new System.Drawing.Point(24, 90);
             this.lblNome.Name = "lblNome";
-            this.lblNome.Size = new System.Drawing.Size(35, 13);
+            this.lblNome.Size = new System.Drawing.Size(70, 13);
             this.lblNome.TabIndex = 1;
-            this.lblNome.Text = "Nome";
+            this.lblNome.Text = "Razão Social";
             // 
             // lblCnpj
             // 
             this.lblCnpj.AutoSize = true;
-            this.lblCnpj.Location = new System.Drawing.Point(46, 129);
+            this.lblCnpj.Location = new System.Drawing.Point(24, 125);
             this.lblCnpj.Name = "lblCnpj";
             this.lblCnpj.Size = new System.Drawing.Size(34, 13);
             this.lblCnpj.TabIndex = 2;
@@ -84,7 +84,7 @@
             // lblUf
             // 
             this.lblUf.AutoSize = true;
-            this.lblUf.Location = new System.Drawing.Point(46, 166);
+            this.lblUf.Location = new System.Drawing.Point(24, 160);
             this.lblUf.Name = "lblUf";
             this.lblUf.Size = new System.Drawing.Size(21, 13);
             this.lblUf.TabIndex = 3;
@@ -149,11 +149,11 @@
             // 
             // groupBox1
             // 
-            this.groupBox1.Controls.Add(this.lblNome);
-            this.groupBox1.Controls.Add(this.btnSalvar);
             this.groupBox1.Controls.Add(this.txtNome);
             this.groupBox1.Controls.Add(this.txtCnpj);
             this.groupBox1.Controls.Add(this.cboUf);
+            this.groupBox1.Controls.Add(this.btnSalvar);
+            this.groupBox1.Controls.Add(this.lblNome);
             this.groupBox1.Controls.Add(this.lblUf);
             this.groupBox1.Controls.Add(this.lblCnpj);
             this.groupBox1.Location = new System.Drawing.Point(21, 25);
@@ -199,7 +199,7 @@
             // 
             // btnEditSalvar
             // 
-            this.btnEditSalvar.Location = new System.Drawing.Point(217, 226);
+            this.btnEditSalvar.Location = new System.Drawing.Point(217, 262);
             this.btnEditSalvar.Name = "btnEditSalvar";
             this.btnEditSalvar.Size = new System.Drawing.Size(75, 23);
             this.btnEditSalvar.TabIndex = 15;
@@ -210,7 +210,7 @@
             // lblEditUf
             // 
             this.lblEditUf.AutoSize = true;
-            this.lblEditUf.Location = new System.Drawing.Point(46, 167);
+            this.lblEditUf.Location = new System.Drawing.Point(24, 161);
             this.lblEditUf.Name = "lblEditUf";
             this.lblEditUf.Size = new System.Drawing.Size(21, 13);
             this.lblEditUf.TabIndex = 12;
@@ -220,7 +220,7 @@
             // 
             this.btnApagarEmpresa.BackColor = System.Drawing.Color.Red;
             this.btnApagarEmpresa.ForeColor = System.Drawing.SystemColors.ButtonFace;
-            this.btnApagarEmpresa.Location = new System.Drawing.Point(49, 226);
+            this.btnApagarEmpresa.Location = new System.Drawing.Point(49, 262);
             this.btnApagarEmpresa.Name = "btnApagarEmpresa";
             this.btnApagarEmpresa.Size = new System.Drawing.Size(75, 23);
             this.btnApagarEmpresa.TabIndex = 17;
@@ -231,11 +231,11 @@
             // lblEditNome
             // 
             this.lblEditNome.AutoSize = true;
-            this.lblEditNome.Location = new System.Drawing.Point(46, 86);
+            this.lblEditNome.Location = new System.Drawing.Point(24, 89);
             this.lblEditNome.Name = "lblEditNome";
-            this.lblEditNome.Size = new System.Drawing.Size(35, 13);
+            this.lblEditNome.Size = new System.Drawing.Size(70, 13);
             this.lblEditNome.TabIndex = 10;
-            this.lblEditNome.Text = "Nome";
+            this.lblEditNome.Text = "Razão Social";
             // 
             // txtEditCnpj
             // 
@@ -262,7 +262,7 @@
             // lblEditCnpj
             // 
             this.lblEditCnpj.AutoSize = true;
-            this.lblEditCnpj.Location = new System.Drawing.Point(46, 130);
+            this.lblEditCnpj.Location = new System.Drawing.Point(24, 125);
             this.lblEditCnpj.Name = "lblEditCnpj";
             this.lblEditCnpj.Size = new System.Drawing.Size(34, 13);
             this.lblEditCnpj.TabIndex = 11;
@@ -273,7 +273,7 @@
             this.lblAviso.AutoSize = true;
             this.lblAviso.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblAviso.ForeColor = System.Drawing.Color.Crimson;
-            this.lblAviso.Location = new System.Drawing.Point(478, 11);
+            this.lblAviso.Location = new System.Drawing.Point(481, 13);
             this.lblAviso.Name = "lblAviso";
             this.lblAviso.Size = new System.Drawing.Size(266, 17);
             this.lblAviso.TabIndex = 26;
@@ -289,6 +289,7 @@
             this.lblVisualizar.TabIndex = 23;
             this.lblVisualizar.Text = "Visualizar todas as empresas";
             this.lblVisualizar.UseWaitCursor = true;
+            this.lblVisualizar.Click += new System.EventHandler(this.lblVisualizar_Click);
             // 
             // btnCarregarEmpressas
             // 
@@ -310,6 +311,7 @@
             this.listViewEmpresas.FullRowSelect = true;
             this.listViewEmpresas.HideSelection = false;
             this.listViewEmpresas.Location = new System.Drawing.Point(22, 42);
+            this.listViewEmpresas.MultiSelect = false;
             this.listViewEmpresas.Name = "listViewEmpresas";
             this.listViewEmpresas.Size = new System.Drawing.Size(426, 325);
             this.listViewEmpresas.TabIndex = 18;
@@ -324,7 +326,7 @@
             // 
             // clnNome
             // 
-            this.clnNome.Text = "Nome";
+            this.clnNome.Text = "Razão Social";
             this.clnNome.Width = 230;
             // 
             // clnCNPJ
@@ -342,6 +344,7 @@
             this.ClientSize = new System.Drawing.Size(800, 450);
             this.Controls.Add(this.tabctrlEmpresa);
             this.Name = "CadastroDeEmpresaForm";
+            this.Text = "Cadastro de Empresa";
             this.tabctrlEmpresa.ResumeLayout(false);
             this.tabNovaEmpresa.ResumeLayout(false);
             this.groupBox1.ResumeLayout(false);

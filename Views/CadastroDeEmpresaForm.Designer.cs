@@ -49,8 +49,6 @@
             this.txtEditNome = new System.Windows.Forms.TextBox();
             this.lblEditCnpj = new System.Windows.Forms.Label();
             this.lblAviso = new System.Windows.Forms.Label();
-            this.lblVisualizar = new System.Windows.Forms.Label();
-            this.btnCarregarEmpressas = new System.Windows.Forms.Button();
             this.listViewEmpresas = new System.Windows.Forms.ListView();
             this.clnID = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.clnNome = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
@@ -107,12 +105,13 @@
             // 
             // btnSalvar
             // 
+            this.btnSalvar.BackColor = System.Drawing.Color.LightBlue;
             this.btnSalvar.Location = new System.Drawing.Point(229, 285);
             this.btnSalvar.Name = "btnSalvar";
             this.btnSalvar.Size = new System.Drawing.Size(75, 23);
             this.btnSalvar.TabIndex = 7;
             this.btnSalvar.Text = "Salvar";
-            this.btnSalvar.UseVisualStyleBackColor = true;
+            this.btnSalvar.UseVisualStyleBackColor = false;
             this.btnSalvar.Click += new System.EventHandler(this.btnSalvar_Click);
             // 
             // txtCnpj
@@ -135,9 +134,11 @@
             this.tabctrlEmpresa.SelectedIndex = 0;
             this.tabctrlEmpresa.Size = new System.Drawing.Size(799, 449);
             this.tabctrlEmpresa.TabIndex = 9;
+            this.tabctrlEmpresa.Selected += new System.Windows.Forms.TabControlEventHandler(this.tabctrlEmpresa_Selected);
             // 
             // tabNovaEmpresa
             // 
+            this.tabNovaEmpresa.BackColor = System.Drawing.Color.Azure;
             this.tabNovaEmpresa.Controls.Add(this.groupBox1);
             this.tabNovaEmpresa.Location = new System.Drawing.Point(4, 22);
             this.tabNovaEmpresa.Name = "tabNovaEmpresa";
@@ -145,10 +146,10 @@
             this.tabNovaEmpresa.Size = new System.Drawing.Size(791, 423);
             this.tabNovaEmpresa.TabIndex = 0;
             this.tabNovaEmpresa.Text = "Novo Registro";
-            this.tabNovaEmpresa.UseVisualStyleBackColor = true;
             // 
             // groupBox1
             // 
+            this.groupBox1.BackColor = System.Drawing.Color.White;
             this.groupBox1.Controls.Add(this.txtNome);
             this.groupBox1.Controls.Add(this.txtCnpj);
             this.groupBox1.Controls.Add(this.cboUf);
@@ -165,11 +166,10 @@
             // 
             // tabEditEmpresa
             // 
+            this.tabEditEmpresa.BackColor = System.Drawing.Color.Azure;
             this.tabEditEmpresa.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.tabEditEmpresa.Controls.Add(this.pnlEdit);
             this.tabEditEmpresa.Controls.Add(this.lblAviso);
-            this.tabEditEmpresa.Controls.Add(this.lblVisualizar);
-            this.tabEditEmpresa.Controls.Add(this.btnCarregarEmpressas);
             this.tabEditEmpresa.Controls.Add(this.listViewEmpresas);
             this.tabEditEmpresa.Location = new System.Drawing.Point(4, 22);
             this.tabEditEmpresa.Name = "tabEditEmpresa";
@@ -177,10 +177,10 @@
             this.tabEditEmpresa.Size = new System.Drawing.Size(791, 423);
             this.tabEditEmpresa.TabIndex = 1;
             this.tabEditEmpresa.Text = "Editar Registros";
-            this.tabEditEmpresa.UseVisualStyleBackColor = true;
             // 
             // pnlEdit
             // 
+            this.pnlEdit.BackColor = System.Drawing.Color.White;
             this.pnlEdit.Controls.Add(this.btnEditSalvar);
             this.pnlEdit.Controls.Add(this.lblEditUf);
             this.pnlEdit.Controls.Add(this.btnApagarEmpresa);
@@ -199,12 +199,13 @@
             // 
             // btnEditSalvar
             // 
+            this.btnEditSalvar.BackColor = System.Drawing.Color.LightBlue;
             this.btnEditSalvar.Location = new System.Drawing.Point(217, 262);
             this.btnEditSalvar.Name = "btnEditSalvar";
             this.btnEditSalvar.Size = new System.Drawing.Size(75, 23);
             this.btnEditSalvar.TabIndex = 15;
             this.btnEditSalvar.Text = "Salvar";
-            this.btnEditSalvar.UseVisualStyleBackColor = true;
+            this.btnEditSalvar.UseVisualStyleBackColor = false;
             this.btnEditSalvar.Click += new System.EventHandler(this.btnEditSalvar_Click);
             // 
             // lblEditUf
@@ -218,7 +219,7 @@
             // 
             // btnApagarEmpresa
             // 
-            this.btnApagarEmpresa.BackColor = System.Drawing.Color.Red;
+            this.btnApagarEmpresa.BackColor = System.Drawing.Color.Tomato;
             this.btnApagarEmpresa.ForeColor = System.Drawing.SystemColors.ButtonFace;
             this.btnApagarEmpresa.Location = new System.Drawing.Point(49, 262);
             this.btnApagarEmpresa.Name = "btnApagarEmpresa";
@@ -272,34 +273,12 @@
             // 
             this.lblAviso.AutoSize = true;
             this.lblAviso.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblAviso.ForeColor = System.Drawing.Color.Crimson;
-            this.lblAviso.Location = new System.Drawing.Point(481, 13);
+            this.lblAviso.ForeColor = System.Drawing.Color.MidnightBlue;
+            this.lblAviso.Location = new System.Drawing.Point(95, 13);
             this.lblAviso.Name = "lblAviso";
             this.lblAviso.Size = new System.Drawing.Size(266, 17);
             this.lblAviso.TabIndex = 26;
             this.lblAviso.Text = "Selecione uma empresa para editar";
-            // 
-            // lblVisualizar
-            // 
-            this.lblVisualizar.AutoSize = true;
-            this.lblVisualizar.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblVisualizar.Location = new System.Drawing.Point(114, 13);
-            this.lblVisualizar.Name = "lblVisualizar";
-            this.lblVisualizar.Size = new System.Drawing.Size(193, 17);
-            this.lblVisualizar.TabIndex = 23;
-            this.lblVisualizar.Text = "Visualizar todas as empresas";
-            this.lblVisualizar.UseWaitCursor = true;
-
-            // 
-            // btnCarregarEmpressas
-            // 
-            this.btnCarregarEmpressas.Location = new System.Drawing.Point(348, 8);
-            this.btnCarregarEmpressas.Name = "btnCarregarEmpressas";
-            this.btnCarregarEmpressas.Size = new System.Drawing.Size(75, 23);
-            this.btnCarregarEmpressas.TabIndex = 22;
-            this.btnCarregarEmpressas.Text = "Carregar";
-            this.btnCarregarEmpressas.UseVisualStyleBackColor = true;
-            this.btnCarregarEmpressas.Click += new System.EventHandler(this.btnCarregarEmpressas_Click);
             // 
             // listViewEmpresas
             // 
@@ -377,8 +356,6 @@
         private System.Windows.Forms.Label lblEditUf;
         private System.Windows.Forms.Button btnApagarEmpresa;
         private System.Windows.Forms.ListView listViewEmpresas;
-        private System.Windows.Forms.Label lblVisualizar;
-        private System.Windows.Forms.Button btnCarregarEmpressas;
         private System.Windows.Forms.ColumnHeader clnNome;
         private System.Windows.Forms.ColumnHeader clnCNPJ;
         private System.Windows.Forms.ColumnHeader clnUF;

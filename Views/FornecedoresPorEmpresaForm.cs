@@ -16,32 +16,32 @@ namespace ListagemDeFornecedores.Views
 {
     public partial class FornecedoresPorEmpresaForm : Form
     {
-        public object EmpresaDao { get; private set; }
 
         public FornecedoresPorEmpresaForm()
         {
             InitializeComponent();
         }
 
-        private void toolBtnCarregar_Click(object sender, EventArgs e)
+    
+
+        private void PreencheBindSource(List<Empresa> _empresas)
         {
-            List<Empresa> _empresas = EmpresaDAO.GetEmpresas();
             foreach (Empresa emp in _empresas)
             {
                 bindingSource.Add(emp);
             }
-
-            txtNome.DataBindings.Add("Text", bindingSource, "Nome", false, DataSourceUpdateMode.OnPropertyChanged);
-            txtCnpj.DataBindings.Add("Text", bindingSource, "CNPJ", false, DataSourceUpdateMode.OnPropertyChanged);
-            txtUf.DataBindings.Add("Text", bindingSource, "UF", false, DataSourceUpdateMode.OnPropertyChanged);
-
         }
-
 
         private void btnAdicionar_Click(object sender, EventArgs e)
         {
             CadastroDeFornecedoresForm form = new CadastroDeFornecedoresForm((Empresa)bindingSource.Current);
-            form.Show();
+
+            if (form.ShowDialog() != DialogResult.Yes)
+            {
+                //aguarda o fechamento da tela para atualizar o bindingSource
+                bindingSource_CurrentChanged(this, new EventArgs { });
+            }
+
         }
 
         private void listViewFornecedores_SelectedIndexChanged(object sender, EventArgs e)
@@ -57,7 +57,7 @@ namespace ListagemDeFornecedores.Views
             }
             foreach (Fornecedor f in _fornecedores)
             {
-                if (f.GetType().Name == typeof(FornecedorPF).Name)
+                if (f.GetType() == typeof(FornecedorPF))
                 {
                     listViewFornecedores.Items.Add(
                       new ListViewItem(
@@ -66,11 +66,12 @@ namespace ListagemDeFornecedores.Views
                               f.Tipo,
                               (f as FornecedorPF).NomeFornecedor,
                              (f as FornecedorPF).Cpf,
-                             ""
-                          }));
+                             "",
+                             (f as FornecedorPF).DataNascimento.ToString("dd/MM/yyyy")
+                          })); 
                 }
                 else
-                if (f.GetType().Name == typeof(FornecedorPJ).GetType().Name)
+                if (f.GetType() ==typeof(FornecedorPJ))
                 {
 
                     Empresa _emp = EmpresaDAO.GetEmpresa((f as FornecedorPJ).EmpresaFornecedorId);
@@ -81,7 +82,8 @@ namespace ListagemDeFornecedores.Views
                               f.Tipo,
                               _emp.Nome,
                              _emp.CNPJ,
-                             _emp.UF
+                             _emp.UF,
+                             ""
                           }));
                 }
             }
@@ -102,12 +104,46 @@ namespace ListagemDeFornecedores.Views
 
         private void btnEditar_Click(object sender, EventArgs e)
         {
-            //todo: editar fornecedor
+
+            MessageBox.Show("Função em desenvolvimento","Desculpe");
+            //if (listViewFornecedores.SelectedItems.Count >= 1)
+            //{
+
+
+            //    string itemSelecionadoId = listViewFornecedores.SelectedItems[0].SubItems[0].Text;
+
+            //    var _fornecedor = FornecedorDAO.GetFornecedor(int.Parse(itemSelecionadoId));
+
+            //    var _empresa = EmpresaDAO.GetEmpresa(_fornecedor.EmpresaId);
+
+            //   CadastroDeFornecedoresForm form = new CadastroDeFornecedoresForm(_empresa, _fornecedor);
+
+            //}
         }
 
-        private void btnExcluir_Click(object sender, EventArgs e)
+        private async void btnExcluir_ClickAsync(object sender, EventArgs e)
         {
-            //todo: excluir fornecedor
+            if (listViewFornecedores.SelectedItems.Count >= 1)
+            {
+
+                string itemSelecionadoId = listViewFornecedores.SelectedItems[0].SubItems[0].Text;
+
+                await FornecedorDAO.DeletarFornecedor(int.Parse(itemSelecionadoId));
+
+                bindingSource_CurrentChanged(this, new EventArgs { });
+
+            }
+        }
+
+        private void FornecedoresPorEmpresaForm_Load(object sender, EventArgs e)
+        {
+
+            PreencheBindSource(EmpresaDAO.GetEmpresas());
+
+            groupBox2.Enabled = true;
+            txtNome.DataBindings.Add("Text", bindingSource, "Nome", false, DataSourceUpdateMode.OnPropertyChanged);
+            txtCnpj.DataBindings.Add("Text", bindingSource, "CNPJ", false, DataSourceUpdateMode.OnPropertyChanged);
+            txtUf.DataBindings.Add("Text", bindingSource, "UF", false, DataSourceUpdateMode.OnPropertyChanged);
         }
     }
 }

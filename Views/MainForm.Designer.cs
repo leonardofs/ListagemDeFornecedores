@@ -40,6 +40,7 @@
             // 
             // menuStrip1
             // 
+            this.menuStrip1.BackColor = System.Drawing.Color.LightBlue;
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.cadastrarToolStripMenuItem,
             this.listarToolStripMenuItem});
@@ -89,6 +90,7 @@
             // 
             // ContainerPanel
             // 
+            this.ContainerPanel.BackColor = System.Drawing.Color.Azure;
             this.ContainerPanel.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.ContainerPanel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.ContainerPanel.Location = new System.Drawing.Point(0, 24);

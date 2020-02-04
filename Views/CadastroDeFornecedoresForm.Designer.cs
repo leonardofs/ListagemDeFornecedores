@@ -29,7 +29,6 @@
         private void InitializeComponent()
         {
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.txtIdadeUF = new System.Windows.Forms.MaskedTextBox();
             this.btnSelecionarPJ = new System.Windows.Forms.Button();
             this.txtPJ = new System.Windows.Forms.TextBox();
             this.lblPJ = new System.Windows.Forms.Label();
@@ -54,6 +53,8 @@
             this.clnCNPJ = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.clnUF = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.gBoxEmpresa = new System.Windows.Forms.GroupBox();
+            this.datePickerNasc = new System.Windows.Forms.DateTimePicker();
+            this.cboUF = new System.Windows.Forms.ComboBox();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.gBoxEmpresa.SuspendLayout();
@@ -61,7 +62,9 @@
             // 
             // groupBox1
             // 
-            this.groupBox1.Controls.Add(this.txtIdadeUF);
+            this.groupBox1.BackColor = System.Drawing.Color.White;
+            this.groupBox1.Controls.Add(this.cboUF);
+            this.groupBox1.Controls.Add(this.datePickerNasc);
             this.groupBox1.Controls.Add(this.btnSelecionarPJ);
             this.groupBox1.Controls.Add(this.txtPJ);
             this.groupBox1.Controls.Add(this.lblPJ);
@@ -83,22 +86,15 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Cadastro de Fornecedor";
             // 
-            // txtIdadeUF
-            // 
-            this.txtIdadeUF.Location = new System.Drawing.Point(99, 291);
-            this.txtIdadeUF.Mask = "00";
-            this.txtIdadeUF.Name = "txtIdadeUF";
-            this.txtIdadeUF.Size = new System.Drawing.Size(39, 20);
-            this.txtIdadeUF.TabIndex = 17;
-            // 
             // btnSelecionarPJ
             // 
+            this.btnSelecionarPJ.BackColor = System.Drawing.Color.LightBlue;
             this.btnSelecionarPJ.Location = new System.Drawing.Point(262, 172);
             this.btnSelecionarPJ.Name = "btnSelecionarPJ";
             this.btnSelecionarPJ.Size = new System.Drawing.Size(75, 20);
             this.btnSelecionarPJ.TabIndex = 16;
             this.btnSelecionarPJ.Text = "Selecionar...";
-            this.btnSelecionarPJ.UseVisualStyleBackColor = true;
+            this.btnSelecionarPJ.UseVisualStyleBackColor = false;
             this.btnSelecionarPJ.Visible = false;
             this.btnSelecionarPJ.Click += new System.EventHandler(this.btnSelecionarPJ_Click);
             // 
@@ -125,12 +121,13 @@
             // 
             // btnSelecionar
             // 
+            this.btnSelecionar.BackColor = System.Drawing.Color.LightBlue;
             this.btnSelecionar.Location = new System.Drawing.Point(262, 41);
             this.btnSelecionar.Name = "btnSelecionar";
             this.btnSelecionar.Size = new System.Drawing.Size(75, 20);
             this.btnSelecionar.TabIndex = 13;
             this.btnSelecionar.Text = "Selecionar...";
-            this.btnSelecionar.UseVisualStyleBackColor = true;
+            this.btnSelecionar.UseVisualStyleBackColor = false;
             this.btnSelecionar.Click += new System.EventHandler(this.btnSelecionar_Click);
             // 
             // txtEmpresa
@@ -152,22 +149,24 @@
             // 
             // btnCancelarFornecedor
             // 
+            this.btnCancelarFornecedor.BackColor = System.Drawing.SystemColors.ButtonFace;
             this.btnCancelarFornecedor.Location = new System.Drawing.Point(170, 372);
             this.btnCancelarFornecedor.Name = "btnCancelarFornecedor";
             this.btnCancelarFornecedor.Size = new System.Drawing.Size(75, 23);
             this.btnCancelarFornecedor.TabIndex = 8;
             this.btnCancelarFornecedor.Text = "Cancelar";
-            this.btnCancelarFornecedor.UseVisualStyleBackColor = true;
+            this.btnCancelarFornecedor.UseVisualStyleBackColor = false;
             this.btnCancelarFornecedor.Click += new System.EventHandler(this.button2_Click);
             // 
             // btnSalvarFornecedor
             // 
+            this.btnSalvarFornecedor.BackColor = System.Drawing.Color.LightBlue;
             this.btnSalvarFornecedor.Location = new System.Drawing.Point(262, 372);
             this.btnSalvarFornecedor.Name = "btnSalvarFornecedor";
             this.btnSalvarFornecedor.Size = new System.Drawing.Size(75, 23);
             this.btnSalvarFornecedor.TabIndex = 7;
             this.btnSalvarFornecedor.Text = "Salvar";
-            this.btnSalvarFornecedor.UseVisualStyleBackColor = true;
+            this.btnSalvarFornecedor.UseVisualStyleBackColor = false;
             this.btnSalvarFornecedor.Click += new System.EventHandler(this.btnSalvarFornecedor_Click);
             // 
             // txtNome
@@ -182,9 +181,9 @@
             this.lblIdadeUF.AutoSize = true;
             this.lblIdadeUF.Location = new System.Drawing.Point(6, 299);
             this.lblIdadeUF.Name = "lblIdadeUF";
-            this.lblIdadeUF.Size = new System.Drawing.Size(34, 13);
+            this.lblIdadeUF.Size = new System.Drawing.Size(104, 13);
             this.lblIdadeUF.TabIndex = 5;
-            this.lblIdadeUF.Text = "Idade";
+            this.lblIdadeUF.Text = "Data de Nascimento";
             // 
             // lblCpfCnpj
             // 
@@ -249,26 +248,29 @@
             // 
             // btnCancelar
             // 
+            this.btnCancelar.BackColor = System.Drawing.SystemColors.ButtonFace;
             this.btnCancelar.Location = new System.Drawing.Point(222, 363);
             this.btnCancelar.Name = "btnCancelar";
             this.btnCancelar.Size = new System.Drawing.Size(75, 23);
             this.btnCancelar.TabIndex = 31;
             this.btnCancelar.Text = "Cancelar";
-            this.btnCancelar.UseVisualStyleBackColor = true;
+            this.btnCancelar.UseVisualStyleBackColor = false;
             this.btnCancelar.Click += new System.EventHandler(this.btnCancelar_Click);
             // 
             // btnSelecionarEmpressas
             // 
+            this.btnSelecionarEmpressas.BackColor = System.Drawing.Color.LightBlue;
             this.btnSelecionarEmpressas.Location = new System.Drawing.Point(314, 363);
             this.btnSelecionarEmpressas.Name = "btnSelecionarEmpressas";
             this.btnSelecionarEmpressas.Size = new System.Drawing.Size(75, 23);
             this.btnSelecionarEmpressas.TabIndex = 29;
             this.btnSelecionarEmpressas.Text = "Selecionar";
-            this.btnSelecionarEmpressas.UseVisualStyleBackColor = true;
+            this.btnSelecionarEmpressas.UseVisualStyleBackColor = false;
             this.btnSelecionarEmpressas.Click += new System.EventHandler(this.btnSelecionarEmpressas_Click);
             // 
             // listViewEmpresas
             // 
+            this.listViewEmpresas.BackColor = System.Drawing.Color.PaleTurquoise;
             this.listViewEmpresas.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.clnID,
             this.clnNome,
@@ -306,6 +308,7 @@
             // 
             // gBoxEmpresa
             // 
+            this.gBoxEmpresa.BackColor = System.Drawing.Color.White;
             this.gBoxEmpresa.Controls.Add(this.listViewEmpresas);
             this.gBoxEmpresa.Controls.Add(this.btnCancelar);
             this.gBoxEmpresa.Controls.Add(this.btnSelecionarEmpressas);
@@ -317,10 +320,30 @@
             this.gBoxEmpresa.Text = "Selecionar empresa";
             this.gBoxEmpresa.Visible = false;
             // 
+            // datePickerNasc
+            // 
+            this.datePickerNasc.Location = new System.Drawing.Point(137, 293);
+            this.datePickerNasc.MaxDate = new System.DateTime(2020, 2, 4, 0, 0, 0, 0);
+            this.datePickerNasc.MinDate = new System.DateTime(1900, 1, 1, 0, 0, 0, 0);
+            this.datePickerNasc.Name = "datePickerNasc";
+            this.datePickerNasc.Size = new System.Drawing.Size(200, 20);
+            this.datePickerNasc.TabIndex = 18;
+            this.datePickerNasc.Value = new System.DateTime(2020, 2, 4, 0, 0, 0, 0);
+            // 
+            // cboUF
+            // 
+            this.cboUF.FormattingEnabled = true;
+            this.cboUF.Location = new System.Drawing.Point(137, 293);
+            this.cboUF.Name = "cboUF";
+            this.cboUF.Size = new System.Drawing.Size(121, 21);
+            this.cboUF.TabIndex = 19;
+            this.cboUF.Visible = false;
+            // 
             // CadastroDeFornecedoresForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.Color.Azure;
             this.ClientSize = new System.Drawing.Size(800, 450);
             this.Controls.Add(this.gBoxEmpresa);
             this.Controls.Add(this.groupBox1);
@@ -363,6 +386,7 @@
         private System.Windows.Forms.Button btnSelecionarPJ;
         private System.Windows.Forms.TextBox txtPJ;
         private System.Windows.Forms.Label lblPJ;
-        private System.Windows.Forms.MaskedTextBox txtIdadeUF;
+        private System.Windows.Forms.DateTimePicker datePickerNasc;
+        private System.Windows.Forms.ComboBox cboUF;
     }
 }

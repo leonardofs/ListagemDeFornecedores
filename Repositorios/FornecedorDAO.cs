@@ -23,6 +23,17 @@ namespace ListagemDeFornecedores.Repositorios
         }
 
 
+        public static Fornecedor GetFornecedor(int _fornecedorId)
+        {
+
+            using (var db = new FornecedorContext())
+            {
+
+                return db.Fornecedores.Where(fornecedor => fornecedor.FornecedorId == _fornecedorId).FirstOrDefault();
+            }
+
+        }
+
         public static List<Fornecedor> GetFornecedores()
         {
             using (var db = new FornecedorContext())
@@ -51,26 +62,23 @@ namespace ListagemDeFornecedores.Repositorios
 
         public static async Task EditarFornecedor(Fornecedor _fornecedor)
         {
-            using (var db = new FornecedorContext())
-            {
-                var result = db.Fornecedores.Where(f => f.FornecedorId == _fornecedor.FornecedorId).FirstOrDefault();
-                if (result != null)
-                {
-                    //result.Nome = _fornecedor.Nome;
-                    //result.CNPJ = _fornecedor.CNPJ;
-                    //result.UF = _fornecedor._empresa.UF;
-                    //todo polimorfismo
-                    await db.SaveChangesAsync();
 
-                }
-            }
+            //todo: editar com polimorfismo.
+            //using (var db = new FornecedorContext())
+            //{
+            //    var result = db.Fornecedores.Where(f => f.FornecedorId == _fornecedor.FornecedorId).FirstOrDefault();
+            //    if (result != null)
+            //    {
+            //        await db.SaveChangesAsync();
+            //    }
+            //}
         }
 
-        public static async Task DeletarFornecedor(Fornecedor _fornecedor)
+        public static async Task DeletarFornecedor(int _fornecedorId)
         {
             using (var db = new FornecedorContext())
             {
-                var result = db.Fornecedores.Where(emp => emp.EmpresaId == _fornecedor.FornecedorId).FirstOrDefault();
+                var result = db.Fornecedores.Where(forn=> forn.FornecedorId == _fornecedorId).FirstOrDefault();
                 db.Fornecedores.Remove(result);
 
                 await db.SaveChangesAsync();

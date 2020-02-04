@@ -23,19 +23,19 @@ namespace ListagemDeFornecedores.Views
         {
 
             NovoFormNoPainel(new CadastroDeEmpresaForm());
-            //todo abrir frame de cadastro da empresa
+
         }
 
         private void fornecedorToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            //todo: abrir frame de cadastro de fornecedor
+
             NovoFormNoPainel(new CadastroDeFornecedoresForm());
 
         }
 
         private void fornecedoresPorEmpresaToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            //todo: abrir frame de listagem.
+
             NovoFormNoPainel(new FornecedoresPorEmpresaForm());
         }
 

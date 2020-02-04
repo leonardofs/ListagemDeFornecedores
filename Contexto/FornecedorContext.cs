@@ -44,10 +44,11 @@ namespace ListagemDeFornecedores.Contexto
                 .HasRequired(pj => pj.EmpresaFornecedor)
                 .WithMany()
                 .HasForeignKey(e => e.EmpresaFornecedorId);
-               
-            modelBuilder.Entity<FornecedorPF>()
-               .ToTable("Fornecedor_PF");
 
+            modelBuilder.Entity<FornecedorPF>()
+               .ToTable("Fornecedor_PF")
+               .Property(pf =>pf.DataNascimento)
+               .HasColumnType("datetime2");
 
         }
 

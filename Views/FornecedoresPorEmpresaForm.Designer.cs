@@ -48,7 +48,7 @@
             this.bindingNavigatorMoveNextItem = new System.Windows.Forms.ToolStripButton();
             this.bindingNavigatorMoveLastItem = new System.Windows.Forms.ToolStripButton();
             this.bindingNavigatorSeparator2 = new System.Windows.Forms.ToolStripSeparator();
-            this.toolBtnCarregar = new System.Windows.Forms.ToolStripButton();
+            this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.toolsFornecedor = new System.Windows.Forms.ToolStrip();
             this.btnAdicionar = new System.Windows.Forms.ToolStripButton();
@@ -62,6 +62,7 @@
             this.placeNome = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.placeCpfCnpj = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.placeUF = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.placeNasc = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.bindingNavigator)).BeginInit();
             this.bindingNavigator.SuspendLayout();
@@ -82,14 +83,14 @@
             this.groupBox1.Controls.Add(this.bindingNavigator);
             this.groupBox1.Location = new System.Drawing.Point(13, 12);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(368, 395);
+            this.groupBox1.Size = new System.Drawing.Size(281, 395);
             this.groupBox1.TabIndex = 1;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Empresas";
             // 
             // txtUf
             // 
-            this.txtUf.Location = new System.Drawing.Point(116, 193);
+            this.txtUf.Location = new System.Drawing.Point(91, 190);
             this.txtUf.Name = "txtUf";
             this.txtUf.ReadOnly = true;
             this.txtUf.Size = new System.Drawing.Size(174, 20);
@@ -98,7 +99,7 @@
             // lblUf
             // 
             this.lblUf.AutoSize = true;
-            this.lblUf.Location = new System.Drawing.Point(40, 196);
+            this.lblUf.Location = new System.Drawing.Point(15, 193);
             this.lblUf.Name = "lblUf";
             this.lblUf.Size = new System.Drawing.Size(21, 13);
             this.lblUf.TabIndex = 27;
@@ -106,7 +107,7 @@
             // 
             // txtCnpj
             // 
-            this.txtCnpj.Location = new System.Drawing.Point(116, 156);
+            this.txtCnpj.Location = new System.Drawing.Point(91, 153);
             this.txtCnpj.Name = "txtCnpj";
             this.txtCnpj.ReadOnly = true;
             this.txtCnpj.Size = new System.Drawing.Size(174, 20);
@@ -114,7 +115,7 @@
             // 
             // txtNome
             // 
-            this.txtNome.Location = new System.Drawing.Point(116, 120);
+            this.txtNome.Location = new System.Drawing.Point(91, 117);
             this.txtNome.Name = "txtNome";
             this.txtNome.ReadOnly = true;
             this.txtNome.Size = new System.Drawing.Size(174, 20);
@@ -123,7 +124,7 @@
             // lblCnpj
             // 
             this.lblCnpj.AutoSize = true;
-            this.lblCnpj.Location = new System.Drawing.Point(40, 159);
+            this.lblCnpj.Location = new System.Drawing.Point(15, 156);
             this.lblCnpj.Name = "lblCnpj";
             this.lblCnpj.Size = new System.Drawing.Size(34, 13);
             this.lblCnpj.TabIndex = 26;
@@ -132,7 +133,7 @@
             // lblNome
             // 
             this.lblNome.AutoSize = true;
-            this.lblNome.Location = new System.Drawing.Point(40, 123);
+            this.lblNome.Location = new System.Drawing.Point(15, 120);
             this.lblNome.Name = "lblNome";
             this.lblNome.Size = new System.Drawing.Size(70, 13);
             this.lblNome.TabIndex = 25;
@@ -154,7 +155,7 @@
             this.bindingNavigatorMoveNextItem,
             this.bindingNavigatorMoveLastItem,
             this.bindingNavigatorSeparator2,
-            this.toolBtnCarregar});
+            this.toolStripSeparator3});
             this.bindingNavigator.Location = new System.Drawing.Point(3, 16);
             this.bindingNavigator.MoveFirstItem = this.bindingNavigatorMoveFirstItem;
             this.bindingNavigator.MoveLastItem = this.bindingNavigatorMoveLastItem;
@@ -162,7 +163,7 @@
             this.bindingNavigator.MovePreviousItem = this.bindingNavigatorMovePreviousItem;
             this.bindingNavigator.Name = "bindingNavigator";
             this.bindingNavigator.PositionItem = this.bindingNavigatorPositionItem;
-            this.bindingNavigator.Size = new System.Drawing.Size(362, 26);
+            this.bindingNavigator.Size = new System.Drawing.Size(275, 25);
             this.bindingNavigator.TabIndex = 0;
             this.bindingNavigator.Text = "bindingNavigator1";
             // 
@@ -173,7 +174,7 @@
             // bindingNavigatorCountItem
             // 
             this.bindingNavigatorCountItem.Name = "bindingNavigatorCountItem";
-            this.bindingNavigatorCountItem.Size = new System.Drawing.Size(37, 23);
+            this.bindingNavigatorCountItem.Size = new System.Drawing.Size(37, 22);
             this.bindingNavigatorCountItem.Text = "de {0}";
             this.bindingNavigatorCountItem.ToolTipText = "Número total de itens";
             // 
@@ -183,7 +184,7 @@
             this.bindingNavigatorMoveFirstItem.Image = ((System.Drawing.Image)(resources.GetObject("bindingNavigatorMoveFirstItem.Image")));
             this.bindingNavigatorMoveFirstItem.Name = "bindingNavigatorMoveFirstItem";
             this.bindingNavigatorMoveFirstItem.RightToLeftAutoMirrorImage = true;
-            this.bindingNavigatorMoveFirstItem.Size = new System.Drawing.Size(23, 23);
+            this.bindingNavigatorMoveFirstItem.Size = new System.Drawing.Size(23, 22);
             this.bindingNavigatorMoveFirstItem.Text = "Mover primeiro";
             // 
             // bindingNavigatorMovePreviousItem
@@ -192,13 +193,13 @@
             this.bindingNavigatorMovePreviousItem.Image = ((System.Drawing.Image)(resources.GetObject("bindingNavigatorMovePreviousItem.Image")));
             this.bindingNavigatorMovePreviousItem.Name = "bindingNavigatorMovePreviousItem";
             this.bindingNavigatorMovePreviousItem.RightToLeftAutoMirrorImage = true;
-            this.bindingNavigatorMovePreviousItem.Size = new System.Drawing.Size(23, 23);
+            this.bindingNavigatorMovePreviousItem.Size = new System.Drawing.Size(23, 22);
             this.bindingNavigatorMovePreviousItem.Text = "Mover anterior";
             // 
             // bindingNavigatorSeparator
             // 
             this.bindingNavigatorSeparator.Name = "bindingNavigatorSeparator";
-            this.bindingNavigatorSeparator.Size = new System.Drawing.Size(6, 26);
+            this.bindingNavigatorSeparator.Size = new System.Drawing.Size(6, 25);
             // 
             // bindingNavigatorPositionItem
             // 
@@ -212,7 +213,7 @@
             // bindingNavigatorSeparator1
             // 
             this.bindingNavigatorSeparator1.Name = "bindingNavigatorSeparator1";
-            this.bindingNavigatorSeparator1.Size = new System.Drawing.Size(6, 26);
+            this.bindingNavigatorSeparator1.Size = new System.Drawing.Size(6, 25);
             // 
             // bindingNavigatorMoveNextItem
             // 
@@ -220,7 +221,7 @@
             this.bindingNavigatorMoveNextItem.Image = ((System.Drawing.Image)(resources.GetObject("bindingNavigatorMoveNextItem.Image")));
             this.bindingNavigatorMoveNextItem.Name = "bindingNavigatorMoveNextItem";
             this.bindingNavigatorMoveNextItem.RightToLeftAutoMirrorImage = true;
-            this.bindingNavigatorMoveNextItem.Size = new System.Drawing.Size(23, 23);
+            this.bindingNavigatorMoveNextItem.Size = new System.Drawing.Size(23, 22);
             this.bindingNavigatorMoveNextItem.Text = "Mover próximo";
             // 
             // bindingNavigatorMoveLastItem
@@ -229,33 +230,27 @@
             this.bindingNavigatorMoveLastItem.Image = ((System.Drawing.Image)(resources.GetObject("bindingNavigatorMoveLastItem.Image")));
             this.bindingNavigatorMoveLastItem.Name = "bindingNavigatorMoveLastItem";
             this.bindingNavigatorMoveLastItem.RightToLeftAutoMirrorImage = true;
-            this.bindingNavigatorMoveLastItem.Size = new System.Drawing.Size(23, 23);
+            this.bindingNavigatorMoveLastItem.Size = new System.Drawing.Size(23, 22);
             this.bindingNavigatorMoveLastItem.Text = "Mover último";
             // 
             // bindingNavigatorSeparator2
             // 
             this.bindingNavigatorSeparator2.Name = "bindingNavigatorSeparator2";
-            this.bindingNavigatorSeparator2.Size = new System.Drawing.Size(6, 26);
+            this.bindingNavigatorSeparator2.Size = new System.Drawing.Size(6, 25);
             // 
-            // toolBtnCarregar
+            // toolStripSeparator3
             // 
-            this.toolBtnCarregar.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
-            this.toolBtnCarregar.Font = new System.Drawing.Font("Segoe UI", 10F);
-            this.toolBtnCarregar.Image = ((System.Drawing.Image)(resources.GetObject("toolBtnCarregar.Image")));
-            this.toolBtnCarregar.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolBtnCarregar.Name = "toolBtnCarregar";
-            this.toolBtnCarregar.Size = new System.Drawing.Size(66, 23);
-            this.toolBtnCarregar.Text = "Carregar";
-            this.toolBtnCarregar.ToolTipText = "Carregar";
-            this.toolBtnCarregar.Click += new System.EventHandler(this.toolBtnCarregar_Click);
+            this.toolStripSeparator3.Name = "toolStripSeparator3";
+            this.toolStripSeparator3.Size = new System.Drawing.Size(6, 25);
             // 
             // groupBox2
             // 
             this.groupBox2.Controls.Add(this.toolsFornecedor);
             this.groupBox2.Controls.Add(this.listViewFornecedores);
-            this.groupBox2.Location = new System.Drawing.Point(387, 12);
+            this.groupBox2.Enabled = false;
+            this.groupBox2.Location = new System.Drawing.Point(300, 12);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(401, 395);
+            this.groupBox2.Size = new System.Drawing.Size(488, 395);
             this.groupBox2.TabIndex = 2;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Fornecedores";
@@ -270,12 +265,13 @@
             this.btnExcluir});
             this.toolsFornecedor.Location = new System.Drawing.Point(3, 16);
             this.toolsFornecedor.Name = "toolsFornecedor";
-            this.toolsFornecedor.Size = new System.Drawing.Size(395, 25);
+            this.toolsFornecedor.Size = new System.Drawing.Size(482, 25);
             this.toolsFornecedor.TabIndex = 1;
             this.toolsFornecedor.Text = "toolStrip1";
             // 
             // btnAdicionar
             // 
+            this.btnAdicionar.BackColor = System.Drawing.Color.LightBlue;
             this.btnAdicionar.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
             this.btnAdicionar.Image = ((System.Drawing.Image)(resources.GetObject("btnAdicionar.Image")));
             this.btnAdicionar.ImageTransparentColor = System.Drawing.Color.Magenta;
@@ -292,6 +288,7 @@
             // btnEditar
             // 
             this.btnEditar.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            this.btnEditar.Enabled = false;
             this.btnEditar.Image = ((System.Drawing.Image)(resources.GetObject("btnEditar.Image")));
             this.btnEditar.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.btnEditar.Name = "btnEditar";
@@ -306,13 +303,14 @@
             // 
             // btnExcluir
             // 
+            this.btnExcluir.BackColor = System.Drawing.Color.Tomato;
             this.btnExcluir.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
             this.btnExcluir.Image = ((System.Drawing.Image)(resources.GetObject("btnExcluir.Image")));
             this.btnExcluir.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.btnExcluir.Name = "btnExcluir";
             this.btnExcluir.Size = new System.Drawing.Size(45, 22);
             this.btnExcluir.Text = "Excluir";
-            this.btnExcluir.Click += new System.EventHandler(this.btnExcluir_Click);
+            this.btnExcluir.Click += new System.EventHandler(this.btnExcluir_ClickAsync);
             // 
             // listViewFornecedores
             // 
@@ -321,12 +319,14 @@
             this.placeTipo,
             this.placeNome,
             this.placeCpfCnpj,
-            this.placeUF});
+            this.placeUF,
+            this.placeNasc});
+            this.listViewFornecedores.FullRowSelect = true;
             this.listViewFornecedores.HideSelection = false;
             this.listViewFornecedores.Location = new System.Drawing.Point(6, 44);
             this.listViewFornecedores.MultiSelect = false;
             this.listViewFornecedores.Name = "listViewFornecedores";
-            this.listViewFornecedores.Size = new System.Drawing.Size(392, 348);
+            this.listViewFornecedores.Size = new System.Drawing.Size(482, 348);
             this.listViewFornecedores.TabIndex = 0;
             this.listViewFornecedores.UseCompatibleStateImageBehavior = false;
             this.listViewFornecedores.View = System.Windows.Forms.View.Details;
@@ -335,25 +335,25 @@
             // ID
             // 
             this.ID.Text = "ID";
-            this.ID.Width = 30;
+            this.ID.Width = 23;
             // 
             // placeTipo
             // 
             this.placeTipo.DisplayIndex = 4;
             this.placeTipo.Text = "Tipo";
-            this.placeTipo.Width = 30;
+            this.placeTipo.Width = 38;
             // 
             // placeNome
             // 
             this.placeNome.DisplayIndex = 1;
             this.placeNome.Text = "Nome/ R. Social";
-            this.placeNome.Width = 160;
+            this.placeNome.Width = 178;
             // 
             // placeCpfCnpj
             // 
             this.placeCpfCnpj.DisplayIndex = 2;
             this.placeCpfCnpj.Text = "CPF / CNPJ";
-            this.placeCpfCnpj.Width = 120;
+            this.placeCpfCnpj.Width = 112;
             // 
             // placeUF
             // 
@@ -361,16 +361,22 @@
             this.placeUF.Text = "UF";
             this.placeUF.Width = 30;
             // 
+            // placeNasc
+            // 
+            this.placeNasc.Text = "Data Nascimento";
+            this.placeNasc.Width = 96;
+            // 
             // FornecedoresPorEmpresaForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackColor = System.Drawing.SystemColors.Control;
+            this.BackColor = System.Drawing.Color.Azure;
             this.ClientSize = new System.Drawing.Size(800, 450);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
             this.Name = "FornecedoresPorEmpresaForm";
             this.Text = "FornecedoresPorEmpresa";
+            this.Load += new System.EventHandler(this.FornecedoresPorEmpresaForm_Load);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.bindingNavigator)).EndInit();
@@ -407,7 +413,6 @@
         private System.Windows.Forms.Label lblNome;
         private System.Windows.Forms.BindingSource bindingSource;
         private System.Windows.Forms.TextBox txtUf;
-        private System.Windows.Forms.ToolStripButton toolBtnCarregar;
         private System.Windows.Forms.ToolStrip toolsFornecedor;
         private System.Windows.Forms.ToolStripButton btnAdicionar;
         private System.Windows.Forms.ToolStripButton btnEditar;
@@ -419,5 +424,7 @@
         private System.Windows.Forms.ColumnHeader placeCpfCnpj;
         private System.Windows.Forms.ColumnHeader placeUF;
         private System.Windows.Forms.ColumnHeader placeTipo;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator3;
+        private System.Windows.Forms.ColumnHeader placeNasc;
     }
 }

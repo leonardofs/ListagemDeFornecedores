@@ -14,26 +14,26 @@ using System.Windows.Forms;
 using System.Data.Entity;
 using ListagemDeFornecedores.Repositorios;
 using Sirb.Documents.BR.Validation;
-
-
+using System.Runtime.CompilerServices;
 
 namespace ListagemDeFornecedores.Views
 {
     public partial class CadastroDeFornecedoresForm : Form
     {
-        
         Empresa empresa = null;
         Empresa empresaFornecedora = null;
-        
+
         List<Empresa> empresas = null;
         List<Empresa> empresasFornecedoras = null;
 
         private Fornecedor fornecedor = null;
 
+
         public CadastroDeFornecedoresForm()
         {
             InitializeComponent();
             PreencheTxtEmpresa();
+            btnSalvarFornecedor.Enabled = false;
         }
 
         public CadastroDeFornecedoresForm(Empresa _empresa)
@@ -47,11 +47,18 @@ namespace ListagemDeFornecedores.Views
             InitializeComponent();
             empresa = _empresa;
             fornecedor = _fornecedor;
+
+            EditarFornecedor(_fornecedor);
         }
 
         private void CadastroDeFornecedoresForm_Load(object sender, EventArgs e)
         {
             txtCpf.Mask = Sirb.Documents.BR.Validation.CPF.PlaceMask("00000000000");
+            datePickerNasc.MaxDate = DateTime.Now.Date;
+            datePickerNasc.CustomFormat = "dd/MM/yyyy";
+            cboUF.DataSource = Enum.GetValues(typeof(State));
+            // empresa = null;
+
         }
 
         private void rBtnPF_CheckedChanged(object sender, EventArgs e)
@@ -64,49 +71,55 @@ namespace ListagemDeFornecedores.Views
 
 
                 lblIdadeUF.Text = "UF";
-                
+
                 lblPJ.Visible = true;
                 txtPJ.Visible = true;
                 btnSelecionarPJ.Visible = true;
 
+                cboUF.Visible = true;
+                datePickerNasc.Visible = false;
+
                 txtNome.Enabled = false;
                 txtCpf.Enabled = false;
-                txtIdadeUF.Enabled = false;
+                cboUF.Enabled = false;
+                datePickerNasc.Enabled = false;
 
-                txtIdadeUF.Mask = "CCCC"; 
+               
                 txtNome.ReadOnly = true;
                 txtCpf.ReadOnly = true;
-                txtIdadeUF.ReadOnly = true;
-
+                
 
                 btnSelecionarPJ.Visible = true;
 
             }
             else
             {
-                lblIdadeUF.Text = "Idade";
-                
+                lblIdadeUF.Text = "Data de Nascimento";
+
                 lblNome.Text = "Nome";
                 lblCpfCnpj.Text = "CPF";
                 txtCpf.Mask = Sirb.Documents.BR.Validation.CPF.PlaceMask("00000000000");
 
-                btnSelecionarPJ.Visible =false;
+
+
+                btnSelecionarPJ.Visible = false;
                 lblPJ.Visible = false;
                 txtPJ.Visible = false;
+                cboUF.Visible = false;
+                datePickerNasc.Visible = true;
 
                 txtNome.Enabled = true;
                 txtCpf.Enabled = true;
-                txtIdadeUF.Enabled = true;
+                cboUF.Enabled = false;
+                datePickerNasc.Enabled = true;
 
                 txtNome.ReadOnly = false;
                 txtCpf.ReadOnly = false;
-                txtIdadeUF.ReadOnly = false;
-                txtIdadeUF.Mask = "999";
+             
             }
 
             txtNome.Clear();
             txtCpf.Clear();
-            txtIdadeUF.Clear();
             txtPJ.Clear();
         }
 
@@ -119,7 +132,7 @@ namespace ListagemDeFornecedores.Views
         {
             gBoxEmpresa.Visible = true;
 
-            empresas =EmpresaDAO.GetEmpresas();
+            empresas = EmpresaDAO.GetEmpresas();
 
             foreach (Empresa emp in empresas)
             {
@@ -141,7 +154,7 @@ namespace ListagemDeFornecedores.Views
             listViewEmpresas.Clear();
             gBoxEmpresa.Visible = false;
         }
-      
+
         public void PreencheTxtEmpresa()
         {
             PreencheTxtEmpresa(null);
@@ -149,13 +162,36 @@ namespace ListagemDeFornecedores.Views
 
         public void PreencheTxtEmpresa(Empresa _emp)
         {
-            if (_emp != null) {
+            if (_emp != null)
+            {
                 txtEmpresa.Text = _emp.Nome;
                 empresa = _emp;
-            } else
+            }
+        }
+
+        public void EditarFornecedor(Fornecedor _fornecedor)
+        {
+            if (_fornecedor.GetType() == typeof(FornecedorPF))
             {
+                rBtnPF.Checked = true;
+
+                txtNome.Text = (_fornecedor as FornecedorPF).NomeFornecedor;
+                txtCpf.Text = (_fornecedor as FornecedorPF).Cpf;
+                // todo: logica do botão salvar clique diferenciar o create do update.
+
+            } 
+            else if(_fornecedor.GetType() == typeof(FornecedorPJ))
+            {
+                rBtnPJ.Checked = true;
+
+                // todo: editar informações da empresa?
 
             }
+
+
+
+
+
 
         }
 
@@ -166,10 +202,10 @@ namespace ListagemDeFornecedores.Views
 
                 bool selecaoDeEmpresaFornecedora = (gBoxEmpresa.Text == "Selecione empresa fornecedora");
 
-                //todo erros aqui
+
                 string itemSelecionadoId = listViewEmpresas.SelectedItems[0].SubItems[0].Text;
 
-                if (selecaoDeEmpresaFornecedora)
+                if (selecaoDeEmpresaFornecedora) // selecao de empresa que sera uma fornecedoraPJ.
                 {
 
                     empresaFornecedora = empresasFornecedoras.Find(emp => emp.EmpresaId == int.Parse(itemSelecionadoId));
@@ -177,17 +213,18 @@ namespace ListagemDeFornecedores.Views
                     txtPJ.Text = empresaFornecedora.Nome;
                     txtNome.Text = empresaFornecedora.Nome;
                     txtCpf.Text = empresaFornecedora.CNPJ;
-                    txtIdadeUF.Mask = "CCCC";
-                   txtIdadeUF.Text = empresaFornecedora.UF;
+                    //Sirb.Documents.BR.Enumeration.State;
+                    cboUF.SelectedItem = (State)Enum.Parse(typeof(State), empresaFornecedora.UF);
                    
+
                 }
-                else
-                {  
+                else // Empresa que recebera fornecedor;
+                {
                     empresa = empresas.Find(emp => emp.EmpresaId == int.Parse(itemSelecionadoId));
                     PreencheTxtEmpresa(empresa);
+                    btnSalvarFornecedor.Enabled = true;
                 }
 
-                //todo não está limpando
                 listViewEmpresas.DataBindings.Clear();
                 gBoxEmpresa.Visible = false;
             }
@@ -200,7 +237,7 @@ namespace ListagemDeFornecedores.Views
 
             gBoxEmpresa.Text = "Selecione empresa fornecedora";
 
-            empresasFornecedoras = EmpresaDAO.GetEmpresas(); 
+            empresasFornecedoras = EmpresaDAO.GetEmpresas();
 
             foreach (Empresa emp in empresasFornecedoras)
             {
@@ -218,26 +255,28 @@ namespace ListagemDeFornecedores.Views
 
         private void btnSalvarFornecedor_Click(object sender, EventArgs e)
         {
-            
-            if (rBtnPF.Checked) {
-                if ( int.Parse(txtIdadeUF.Text) >=18)
+            btnSalvarFornecedor.Enabled = false;
+
+            if (rBtnPF.Checked && empresa != null)
+            {
+                if (IsMaiorDeIdade(datePickerNasc.Value))
                 {
                     if (CPF.IsValid(txtCpf.Text))
                     {
-
                         var _fornecedor = new FornecedorPF()
                         {
                             NomeFornecedor = txtNome.Text,
                             Cpf = txtCpf.Text,
-                            EmpresaId = empresa.EmpresaId
+                            EmpresaId = empresa.EmpresaId,
+                            DataNascimento = datePickerNasc.Value
                         };
 
                         try
                         {
-                        Task task = FornecedorDAO.SalvarFornecedor(_fornecedor);
+                            Task task = FornecedorDAO.SalvarFornecedor(_fornecedor);
 
+                            MessageBox.Show("Fornecedor Salvo com sucesso", "Registro Salvo");
                             this.Dispose();
-
 
                         }
                         catch (Exception)
@@ -245,12 +284,12 @@ namespace ListagemDeFornecedores.Views
 
                             throw;
 
-                        } 
+                        }
 
                     }
                     else
                     {
-                        MessageBox.Show("Informe um CPF valido","Valor incorreto");
+                        MessageBox.Show("Informe um CPF valido", "Valor incorreto");
                         txtCpf.Text = "";
                     }
 
@@ -258,25 +297,40 @@ namespace ListagemDeFornecedores.Views
                 else
                 {
                     MessageBox.Show("Para cadastra uma Pessoa fissica como fornecedor ele deve ser maior de idade.", "Valor invalido");
-                    txtIdadeUF.Text="";
                 }
 
-                
-
-
-            } 
-            else // Fornecedor PJ
+            }
+            else if (rBtnPJ.Checked && empresa != null)
             {
-            
 
-                força erro
-                    //todo : salvar fornecedor PJ
+                if (empresaFornecedora != null | empresa != null)
+                {
 
+                    var task = FornecedorDAO.SalvarFornecedor(
+                        new FornecedorPJ
+                        {
+                            EmpresaId = empresa.EmpresaId,
+                            EmpresaFornecedorId = empresaFornecedora.EmpresaId
+                        }
+                        );
+                    this.Dispose();
+                }
+                {
+
+
+                }
             }
 
-
-
+            btnSalvarFornecedor.Enabled = true;
         }
+
+        public bool IsMaiorDeIdade(DateTime date)
+        {
+            var idade = DateTime.Now.Year - date.Year;
+
+            return (idade >= 18);
+        }
+
     }
 
 }

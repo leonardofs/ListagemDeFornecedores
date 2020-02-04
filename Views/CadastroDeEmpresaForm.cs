@@ -35,7 +35,8 @@ namespace ListagemDeFornecedores.Views
 
         private void btnSalvar_Click(object sender, EventArgs e)
         {
-
+            //evita duplo clique
+            btnSalvar.Enabled = false;
 
             //validação com o Sirb.Validation
             if (Sirb.Documents.BR.Validation.CNPJ.IsValid(txtCnpj.Text))
@@ -55,6 +56,8 @@ namespace ListagemDeFornecedores.Views
             {
                 MessageBox.Show("O CNPJ informado é invalido, por favor corrija.", "ERRO");
             }
+
+            btnSalvar.Enabled = true;
         }
 
         private void txtCnpj_Enter(object sender, EventArgs e)
@@ -62,16 +65,6 @@ namespace ListagemDeFornecedores.Views
             txtCnpj.SelectionStart = 0;
         }
 
-        private void btnCarregarEmpressas_Click(object sender, EventArgs e)
-        {
-
-            btnCarregarEmpressas.Enabled = false;
-            //todo carregar todas as empresas para o listview
-
-            RefreshListView();
-
-            btnCarregarEmpressas.Enabled = true;
-        }
 
         private void listViewEmpresas_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -98,6 +91,7 @@ namespace ListagemDeFornecedores.Views
 
         private void btnEditSalvar_Click(object sender, EventArgs e)
         {
+
             btnEditSalvar.Enabled = false;
             //validação do CNPJ no edit
             if (Sirb.Documents.BR.Validation.CNPJ.IsValid(txtEditCnpj.Text))
@@ -121,7 +115,7 @@ namespace ListagemDeFornecedores.Views
                 MessageBox.Show("CNPJ invalido");
             }
             btnEditSalvar.Enabled = true;
-
+            RefreshListView();
         }
 
         private void btnApagarEmpresa_Click(object sender, EventArgs e)
@@ -140,17 +134,17 @@ namespace ListagemDeFornecedores.Views
                 pnlEdit.Enabled = false;
                 lblAviso.Visible = true;
 
-                RefreshListView();
             }
+
+            RefreshListView();
         }
 
-        //todo: refatorar
+
         private void RefreshListView() {
 
             listViewEmpresas.Items.Clear();
-            empresasList = EmpresaDAO.GetEmpresas();
-           
-            foreach (Empresa emp in empresasList)
+           var _empresas = EmpresaDAO.GetEmpresas();
+            foreach (Empresa emp in _empresas)
             {
                 listViewEmpresas.Items.Add(
                     new ListViewItem(
@@ -162,7 +156,20 @@ namespace ListagemDeFornecedores.Views
                         }));
             }
 
+            empresasList = _empresas;
         }
+
+        private void tabctrlEmpresa_Selected(object sender, TabControlEventArgs e)
+        {
+            if (tabctrlEmpresa.SelectedTab.Name==tabEditEmpresa.Name)
+            {
+
+                RefreshListView();
+
+
+            }
+        }
+
 
     }
 }
